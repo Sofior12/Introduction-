@@ -1,3 +1,5 @@
+<!-- tumhara poora HTML/form yahan -->
+
 <script>
 const form = document.getElementById("introForm");
 const button = document.getElementById("sendBtn");
@@ -28,7 +30,6 @@ form.addEventListener("submit", async (e) => {
 
     form.reset();
     status.textContent = "✓ Introduction sent successfully!";
-
   } catch (error) {
     status.textContent = "✕ " + error.message;
   } finally {
@@ -36,3 +37,6 @@ form.addEventListener("submit", async (e) => {
   }
 });
 </script>
+
+</body>
+</html>
