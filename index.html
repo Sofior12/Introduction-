@@ -1,1 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Introduction • Tell Me About You</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      color: #fff;
+      background: #07070c;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 20% 20%, #6d28d955, transparent 28%),
+        radial-gradient(circle at 80% 10%, #06b6d455, transparent 25%),
+        radial-gradient(circle at 50% 90%, #ec489955, transparent 28%);
+      filter: blur(45px);
+      z-index: -1;
+    }
+
+    .wrap {
+      width: min(680px, 92%);
+      margin: auto;
+      padding: 42px 0 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #ffffff25;
+      border-radius: 999px;
+      background: #ffffff0d;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(38px, 9vw, 70px);
+      line-height: .95;
+      margin: 18px 0 12px;
+      letter-spacing: -3px;
+    }
+
+    .gradient {
+      background: linear-gradient(
+        90deg,
+        #fff,
+        #9be7ff,
+        #d8b4fe,
+        #fff
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .sub {
+      color: #b7b7c7;
+      max-width: 520px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid #ffffff18;
+      border-radius: 28px;
+      background: #ffffff0b;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 80px #0008;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #c8c8d2;
+      margin: 0 0 8px 3px;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #ffffff18;
+      border-radius: 15px;
+      padding: 14px 15px;
+      background: #050509aa;
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+      transition: .2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 4px #8b5cf61c;
+    }
+
+    textarea {
+      min-height: 115px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .icon {
+      position: absolute;
+      margin: 14px 0 0 15px;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .relative input {
+      padding-left: 42px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(100deg, #7c3aed, #06b6d4);
+      box-shadow: 0 12px 35px #06b6d42a;
+      transition: .2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
+    #status {
+      text-align: center;
+      min-height: 22px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #bdbdc9;
+    }
+
+    .footer {
+      text-align: center;
+      color: #777;
+      margin-top: 20px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 19px;
+        border-radius: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <span class="badge">✦ New connection</span>
+
+      <h1>
+        Tell me
+        <span class="gradient">your story.</span>
+      </h1>
+
+      <p class="sub">
+        A quick introduction — leave your details
+        and a little message. Make it yours.
+      </p>
+    </header>
+
+
+    <form class="card" id="introForm">
+
+      <!-- Name + Age -->
+      <div class="row">
+
+        <div class="field">
+          <label>Name *</label>
+
+          <input
+            name="name"
+            required
+            maxlength="80"
+            placeholder="Your name"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Age *</label>
+
+          <input
+            name="age"
+            type="number"
+            min="1"
+            max="120"
+            required
+            placeholder="18"
+          >
+        </div>
+
+      </div>
+
+
+      <!-- Telegram -->
+      <div class="field">
+
+        <label>Telegram username</label>
+
+        <div class="relative">
+
+          <span class="icon">@</span>
+
+          <input
+            name="telegram"
+            maxlength="64"
+            placeholder="username"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Instagram -->
+      <div class="field">
+
+        <label>Instagram</label>
+
+        <div class="relative">
+
+          <span class="icon">◎</span>
+
+          <input
+            name="instagram"
+            maxlength="64"
+            placeholder="instagram username"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Message -->
+      <div class="field">
+
+        <label>Message *</label>
+
+        <textarea
+          name="message"
+          required
+          maxlength="1000"
+          placeholder="Say something interesting..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- Anti-bot hidden field -->
+      <input
+        name="website"
+        tabindex="-1"
+        autocomplete="off"
+        style="display:none"
+      >
+
+
+      <button id="sendBtn" type="submit">
+        Send Introduction ✦
+      </button>
+
+
+      <div id="status"></div>
+
+    </form>
+
+
+    <div class="footer">
+      Your introduction is sent securely.
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const form = document.getElementById("introForm");
+    const btn = document.getElementById("sendBtn");
+    const status = document.getElementById("status");
+
+
+    form.addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+      btn.disabled = true;
+      status.textContent = "Sending…";
+
+
+      const data = Object.fromEntries(
+        new FormData(form).entries()
+      );
+
+
+      try {
+
+        const response = await fetch(
+          "/api/notify",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(data)
+          }
+        );
+
+
+        const result = await response.json();
+
+
+        if (!response.ok) {
+          throw new Error(
+            result.error || "Something went wrong"
+          );
+        }
+
+
+        form.reset();
+
+        status.textContent =
+          "✓ Introduction sent successfully!";
+
+      }
+
+      catch (error) {
+
+        status.textContent =
+          "✕ " + error.message;
+
+      }
+
+      finally {
+
+        btn.disabled = false;
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
