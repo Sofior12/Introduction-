@@ -3,48 +3,34 @@ const form = document.getElementById("introForm");
 const button = document.getElementById("sendBtn");
 const status = document.getElementById("status");
 
-// Apna NEW Discord webhook URL yahan paste karo
-const webhookUrl = "https://discord.com/api/webhooks/1544388423224397864/aMIWMppwS-Vs7EXguvU9A8R3zAq6Tu_50r3a6wvbaK4509KaBAUaqzj6SwEZVNFFLm5v";
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
   button.disabled = true;
   status.textContent = "Sending...";
 
-  const data = new FormData(form);
-
-  const payload = {
-    content:
-`✨ **NEW INTRODUCTION**
-
-👤 **Name:** ${data.get("name")}
-🎂 **Age:** ${data.get("age")}
-📱 **Telegram:** ${data.get("telegram") || "—"}
-📸 **Instagram:** ${data.get("instagram") || "—"}
-
-💬 **Message:**
-${data.get("message")}`
-  };
+  const data = Object.fromEntries(new FormData(form));
 
   try {
-    const response = await fetch(webhookUrl, {
+    const response = await fetch("/api/notify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(data)
     });
 
+    const result = await response.json();
+
     if (!response.ok) {
-      throw new Error("Notification failed");
+      throw new Error(result.error || "Something went wrong");
     }
 
     form.reset();
-    status.textContent = "✓ Sent successfully!";
+    status.textContent = "✓ Introduction sent successfully!";
 
   } catch (error) {
-    status.textContent = "✕ Failed to send";
+    status.textContent = "✕ " + error.message;
   } finally {
     button.disabled = false;
   }
