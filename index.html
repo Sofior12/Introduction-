@@ -1,42 +1,198 @@
-<!-- tumhara poora HTML/form yahan -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script>
-const form = document.getElementById("introForm");
-const button = document.getElementById("sendBtn");
-const status = document.getElementById("status");
+  <title>Introduction Form</title>
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  button.disabled = true;
-  status.textContent = "Sending...";
-
-  const data = Object.fromEntries(new FormData(form));
-
-  try {
-    const response = await fetch("/api/notify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.error || "Something went wrong");
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    form.reset();
-    status.textContent = "✓ Introduction sent successfully!";
-  } catch (error) {
-    status.textContent = "✕ " + error.message;
-  } finally {
-    button.disabled = false;
-  }
-});
-</script>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #555;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #111;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      min-height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Introduction</h1>
+
+    <form id="introForm">
+
+      <div class="field">
+        <label for="age">Age</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          min="1"
+          max="120"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="telegram">Telegram</label>
+        <input
+          type="text"
+          id="telegram"
+          name="telegram"
+          placeholder="@username"
+        >
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <input
+          type="text"
+          id="instagram"
+          name="instagram"
+          placeholder="@username"
+        >
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Write your message..."
+          required
+        ></textarea>
+      </div>
+
+      <button id="sendBtn" type="submit">
+        Send Introduction
+      </button>
+
+      <div id="status"></div>
+
+    </form>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("introForm");
+    const button = document.getElementById("sendBtn");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      button.disabled = true;
+      status.textContent = "Sending...";
+
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const response = await fetch("/api/notify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.error || "Something went wrong"
+          );
+        }
+
+        form.reset();
+        status.textContent =
+          "✓ Introduction sent successfully!";
+
+      } catch (error) {
+        status.textContent =
+          "✕ " + error.message;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
