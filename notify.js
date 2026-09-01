@@ -4,13 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, age, telegram, instagram, message, website } =
-      req.body || {};
-
-    // Anti-bot check
-    if (website) {
-      return res.status(400).json({ error: "Invalid submission" });
-    }
+    const { name, age, telegram, instagram, message } = req.body || {};
 
     if (!name || !age || !message) {
       return res.status(400).json({
@@ -18,42 +12,48 @@ export default async function handler(req, res) {
       });
     }
 
-    // Discord webhook secret
-    const webhook = process.env.DISCORD_WEBHOOK_URL;
+    const botToken = process.env.BOT_TOKEN;
+    const chatId = process.env.CHAT_ID;
 
-    if (!webhook) {
+    if (!botToken || !chatId) {
       return res.status(500).json({
-        error: "Discord webhook is not configured"
+        error: "Telegram is not configured"
       });
     }
 
-    const content = `✨ **NEW INTRODUCTION**
+    const text = `📩 NEW INTRODUCTION
 
-👤 **Name:** ${name}
-🎂 **Age:** ${age}
-📱 **Telegram:** ${telegram || "—"}
-📸 **Instagram:** ${instagram || "—"}
+👤 Name: ${name}
+🎂 Age: ${age}
+📱 Telegram: ${telegram || "Not provided"}
+📸 Instagram: ${instagram || "Not provided"}
 
-💬 **Message:**
+💬 Message:
 ${message}`;
 
-    const response = await fetch(webhook, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        content: content
-      })
-    });
+    const response = await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text
+        })
+      }
+    );
 
-    if (!response.ok) {
-      return res.status(502).json({
-        error: "Discord notification failed"
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      return res.status(500).json({
+        error: "Telegram notification failed"
       });
     }
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ success: true });
 
   } catch (error) {
     return res.status(500).json({
