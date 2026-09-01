@@ -4,15 +4,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {
-      name,
-      age,
-      telegram,
-      instagram,
-      message,
-      website
-    } = req.body || {};
+    const { name, age, telegram, instagram, message, website } =
+      req.body || {};
 
+    // Anti-bot check
     if (website) {
       return res.status(400).json({ error: "Invalid submission" });
     }
@@ -23,42 +18,38 @@ export default async function handler(req, res) {
       });
     }
 
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    // Discord webhook secret
+    const webhook = process.env.DISCORD_WEBHOOK_URL;
 
-    if (!token || !chatId) {
+    if (!webhook) {
       return res.status(500).json({
-        error: "Telegram is not configured"
+        error: "Discord webhook is not configured"
       });
     }
 
-    const text = `✨ NEW INTRODUCTION
+    const content = `✨ **NEW INTRODUCTION**
 
-👤 Name: ${name}
-🎂 Age: ${age}
-📱 Telegram: ${telegram || "—"}
-📸 Instagram: ${instagram || "—"}
+👤 **Name:** ${name}
+🎂 **Age:** ${age}
+📱 **Telegram:** ${telegram || "—"}
+📸 **Instagram:** ${instagram || "—"}
 
-💬 Message:
+💬 **Message:**
 ${message}`;
 
-    const response = await fetch(
-      `https://api.telegram.org/bot${token}/sendMessage`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text
-        })
-      }
-    );
+    const response = await fetch(webhook, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: content
+      })
+    });
 
     if (!response.ok) {
       return res.status(502).json({
-        error: "Telegram notification failed"
+        error: "Discord notification failed"
       });
     }
 
