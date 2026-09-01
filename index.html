@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Introduction Form</title>
+  <title>Introduction</title>
 
   <style>
     * {
@@ -13,67 +13,72 @@
 
     body {
       margin: 0;
+      padding: 40px 20px;
       min-height: 100vh;
       font-family: Arial, sans-serif;
       background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      color: #111;
     }
 
     .container {
       width: 100%;
-      max-width: 500px;
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      max-width: 625px;
+      margin: 110px auto 0;
+      padding: 55px 50px 45px;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     }
 
     h1 {
-      margin-top: 0;
+      margin: 0 0 45px;
       text-align: center;
+      font-size: 48px;
+      line-height: 1.1;
     }
 
     .field {
-      margin-bottom: 18px;
+      margin-bottom: 30px;
     }
 
     label {
       display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 27px;
+      font-weight: 700;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 13px;
       border: 1px solid #ccc;
-      border-radius: 9px;
-      font-size: 16px;
+      border-radius: 15px;
+      padding: 18px 23px;
+      font-size: 24px;
+      font-family: inherit;
       outline: none;
+      background: #fff;
+      color: #111;
     }
 
     input:focus,
     textarea:focus {
-      border-color: #555;
+      border-color: #111;
     }
 
     textarea {
-      min-height: 120px;
+      min-height: 210px;
       resize: vertical;
     }
 
     button {
       width: 100%;
-      padding: 14px;
       border: none;
-      border-radius: 9px;
+      border-radius: 15px;
+      padding: 20px;
       background: #111;
       color: white;
-      font-size: 17px;
+      font-size: 28px;
       cursor: pointer;
     }
 
@@ -83,10 +88,48 @@
     }
 
     #status {
-      margin-top: 15px;
+      margin-top: 28px;
       text-align: center;
-      font-weight: bold;
-      min-height: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .success {
+      color: #16803c;
+    }
+
+    .error {
+      color: #c62828;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      .container {
+        margin-top: 130px;
+        padding: 45px 35px 35px;
+        border-radius: 25px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      label {
+        font-size: 25px;
+      }
+
+      input,
+      textarea {
+        font-size: 21px;
+      }
+
+      button {
+        font-size: 25px;
+      }
     }
   </style>
 </head>
@@ -105,6 +148,7 @@
           type="number"
           id="age"
           name="age"
+          placeholder="Enter your age"
           min="1"
           max="120"
           required
@@ -141,15 +185,15 @@
         ></textarea>
       </div>
 
-      <button id="sendBtn" type="submit">
+      <button type="submit" id="sendBtn">
         Send Introduction
       </button>
 
       <div id="status"></div>
 
     </form>
-
   </div>
+
 
   <script>
     const form = document.getElementById("introForm");
@@ -160,20 +204,38 @@
       e.preventDefault();
 
       button.disabled = true;
-      status.textContent = "Sending...";
+      button.textContent = "Sending...";
+      status.textContent = "";
+      status.className = "";
 
-      const data = Object.fromEntries(new FormData(form));
+      const data = Object.fromEntries(
+        new FormData(form).entries()
+      );
 
       try {
         const response = await fetch("/api/notify", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json"
           },
           body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        const contentType =
+          response.headers.get("content-type") || "";
+
+        let result;
+
+        if (contentType.includes("application/json")) {
+          result = await response.json();
+        } else {
+          const text = await response.text();
+
+          throw new Error(
+            text || `Server returned HTTP ${response.status}`
+          );
+        }
 
         if (!response.ok || !result.success) {
           throw new Error(
@@ -182,14 +244,25 @@
         }
 
         form.reset();
+
         status.textContent =
           "✓ Introduction sent successfully!";
 
+        status.className = "success";
+
       } catch (error) {
+
+        console.error("Request error:", error);
+
         status.textContent =
-          "✕ " + error.message;
+          "✕ " + (error.message || "Request failed");
+
+        status.className = "error";
+
       } finally {
+
         button.disabled = false;
+        button.textContent = "Send Introduction";
       }
     });
   </script>
