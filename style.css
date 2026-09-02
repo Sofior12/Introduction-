@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -26,7 +27,6 @@ body {
     overflow: hidden;
 }
 
-/* Rainbow Mesh Gradient */
 .rainbow-mesh {
     position: absolute;
     top: 0;
@@ -48,7 +48,6 @@ body {
     100% { opacity: 1; transform: scale(1.02); }
 }
 
-/* Animated Wave */
 .color-wave {
     position: absolute;
     bottom: -20%;
@@ -72,7 +71,6 @@ body {
     100% { transform: translateX(-10%) scale(1); }
 }
 
-/* Color Orbs */
 .color-orb {
     position: absolute;
     border-radius: 50%;
@@ -96,7 +94,6 @@ body {
     75% { transform: translate(50px, -30px) scale(1.05); }
 }
 
-/* ===== PARTICLES ===== */
 .particles {
     position: absolute;
     top: 0;
@@ -126,14 +123,7 @@ body {
         radial-gradient(2px 2px at 90% 80%, rgba(6,182,212,0.3), transparent),
         radial-gradient(2px 2px at 15% 80%, rgba(251,146,60,0.3), transparent),
         radial-gradient(2px 2px at 45% 20%, rgba(52,211,153,0.3), transparent),
-        radial-gradient(2px 2px at 75% 70%, rgba(236,72,153,0.3), transparent),
-        radial-gradient(3px 3px at 25% 40%, rgba(244,114,182,0.2), transparent),
-        radial-gradient(3px 3px at 55% 55%, rgba(139,92,246,0.2), transparent),
-        radial-gradient(3px 3px at 85% 15%, rgba(6,182,212,0.2), transparent),
-        radial-gradient(3px 3px at 5% 95%, rgba(251,146,60,0.2), transparent),
-        radial-gradient(3px 3px at 95% 45%, rgba(52,211,153,0.2), transparent),
-        radial-gradient(3px 3px at 35% 85%, rgba(236,72,153,0.2), transparent),
-        radial-gradient(3px 3px at 65% 5%, rgba(244,114,182,0.2), transparent);
+        radial-gradient(2px 2px at 75% 70%, rgba(236,72,153,0.3), transparent);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     animation: particleFloat 20s infinite linear;
@@ -712,4 +702,4 @@ body {
     .c1 { width: 300px; height: 300px; }
     .c2 { width: 250px; height: 250px; }
     .c3 { width: 200px; height: 200px; }
-}
+          }
