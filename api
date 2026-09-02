@@ -6,4 +6,37 @@ export default async function handler(req, res) {
     if (req.method === 'OPTIONS') return res.status(200).end();
 
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-    const CHAT_ID = process.env
+    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+    if (!BOT_TOKEN || !CHAT_ID) {
+        return res.status(500).json({
+            ok: false,
+            error: 'Missing credentials. Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in Vercel env.'
+        });
+    }
+
+    if (req.method === 'POST') {
+        try {
+            const { message } = req.body;
+            if (!message) return res.status(400).json({ ok: false, error: 'Message required' });
+
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML',
+                    disable_web_page_preview: true,
+                }),
+            });
+            const data = await response.json();
+            return res.status(200).json(data);
+        } catch (error) {
+            return res.status(500).json({ ok: false, error: error.message });
+        }
+    }
+
+    return res.status(405).json({ ok: false, error: 'Method not allowed' });
+}
