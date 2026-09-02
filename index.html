@@ -3,154 +3,180 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>✨ Secret Message · Colorful</title>
+    <title>2026 · Name</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <!-- Animated Background -->
-    <div class="bg-container">
-        <div class="gradient-orb orb1"></div>
-        <div class="gradient-orb orb2"></div>
-        <div class="gradient-orb orb3"></div>
-        <div class="gradient-orb orb4"></div>
+    <div class="bg-2026">
+        <div class="mesh-gradient"></div>
+        <div class="particle-field">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="orb-2026 o1"></div>
+        <div class="orb-2026 o2"></div>
+        <div class="orb-2026 o3"></div>
+        <div class="orb-2026 o4"></div>
+        <div class="orb-2026 o5"></div>
     </div>
 
-    <div class="container">
-        <div class="card">
+    <div class="container-2026">
+        <div class="card-2026 glass-2026">
 
-            <!-- Header -->
-            <div class="header">
-                <div class="icon-wrapper">
-                    <i class="fas fa-comment-dots"></i>
+            <!-- Status Bar -->
+            <div class="status-2026">
+                <div class="status-left">
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span>Live</span>
+                    </div>
+                    <span class="status-divider">|</span>
+                    <span class="status-step">Step <span id="stepDisplay">1</span>/5</span>
                 </div>
-                <h1>Secret <span>Message</span></h1>
-                <p class="step-info">Step <span id="stepDisplay" class="highlight">1</span> of <span id="totalSteps">4</span></p>
+                <div class="status-right">
+                    <span class="badge-2026"><i class="fas fa-shield-check"></i> Secure</span>
+                    <span class="badge-2026 purple"><i class="fas fa-bolt"></i> 2026</span>
+                </div>
             </div>
 
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-track">
-                    <div class="progress-bar" id="progressBar"></div>
+            <!-- Header -->
+            <div class="header-2026">
+                <div class="logo-2026">
+                    <div class="logo-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <div>
+                        <span class="logo-text">Secret<span class="highlight">Message</span></span>
+                        <span class="logo-sub">anonymous · encrypted</span>
+                    </div>
                 </div>
-                <div class="steps-indicator">
-                    <div class="step-dot active" data-step="1">
-                        <span class="dot-num">1</span>
+                <div class="step-ring">
+                    <svg width="44" height="44" viewBox="0 0 44 44">
+                        <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="3"/>
+                        <circle cx="22" cy="22" r="18" fill="none" stroke="url(#grad)" stroke-width="3" 
+                            stroke-dasharray="113" stroke-dashoffset="90" id="ringProgress"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7c3aed"/>
+                                <stop offset="50%" stop-color="#ec4899"/>
+                                <stop offset="100%" stop-color="#f59e0b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="step-num-2026">1</span>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-2026">
+                <div class="progress-track-2026">
+                    <div class="progress-fill-2026" id="progressBar" style="width:20%"></div>
+                    <div class="progress-glow"></div>
+                </div>
+                <div class="step-dots-2026">
+                    <div class="dot-item active" data-step="1">
+                        <span class="dot-circle"><i class="fas fa-user"></i></span>
                         <span class="dot-label">Name</span>
                     </div>
-                    <div class="step-dot" data-step="2">
-                        <span class="dot-num">2</span>
+                    <div class="dot-item" data-step="2">
+                        <span class="dot-circle"><i class="fas fa-cake"></i></span>
                         <span class="dot-label">Age</span>
                     </div>
-                    <div class="step-dot" data-step="3">
-                        <span class="dot-num">3</span>
+                    <div class="dot-item" data-step="3">
+                        <span class="dot-circle"><i class="fas fa-map-pin"></i></span>
                         <span class="dot-label">City</span>
                     </div>
-                    <div class="step-dot" data-step="4">
-                        <span class="dot-num">4</span>
+                    <div class="dot-item" data-step="4">
+                        <span class="dot-circle"><i class="fab fa-instagram"></i></span>
+                        <span class="dot-label">Instagram</span>
+                    </div>
+                    <div class="dot-item" data-step="5">
+                        <span class="dot-circle"><i class="fas fa-feather"></i></span>
                         <span class="dot-label">Message</span>
                     </div>
                 </div>
             </div>
 
             <!-- Form -->
-            <form id="messageForm">
-
-                <!-- Step 1: Name -->
-                <div class="step active" data-step="1">
-                    <div class="step-icon"><i class="fas fa-user-astronaut"></i></div>
-                    <h2>What's your name?</h2>
-                    <p class="step-desc">Don't worry, it's completely anonymous ✨</p>
-                    <div class="input-group">
-                        <div class="input-field">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="nameInput" placeholder="Enter your name..." required />
+            <form id="nameForm" class="form-2026">
+                <div class="step-2026 active" data-step="1">
+                    <div class="step-content-2026">
+                        <div class="step-icon-2026">
+                            <div class="icon-orb">
+                                <i class="fas fa-user-astronaut"></i>
+                            </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn-next" onclick="nextStep()">
-                        Next Step <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- Step 2: Age -->
-                <div class="step" data-step="2">
-                    <div class="step-icon"><i class="fas fa-cake-candles"></i></div>
-                    <h2>How old are you?</h2>
-                    <p class="step-desc">Just for fun 🎉</p>
-                    <div class="input-group">
-                        <div class="input-field">
-                            <i class="fas fa-calendar-alt"></i>
-                            <input type="number" id="ageInput" placeholder="Enter your age..." min="1" max="120" />
+                        <h2>What's your <span>name</span>?</h2>
+                        <p class="step-desc-2026">✨ Completely anonymous · no one will know</p>
+                        <div class="input-2026">
+                            <div class="input-wrapper-2026">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="nameInput" placeholder="Enter your name..." required />
+                                <div class="input-glow"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                        <button type="button" class="btn-next" onclick="nextStep()">
-                            Next Step <i class="fas fa-arrow-right"></i>
+                        <button type="submit" class="btn-2026 primary">
+                            Continue <i class="fas fa-arrow-right"></i>
+                            <span class="btn-ripple"></span>
                         </button>
                     </div>
                 </div>
-
-                <!-- Step 3: City -->
-                <div class="step" data-step="3">
-                    <div class="step-icon"><i class="fas fa-globe-asia"></i></div>
-                    <h2>Where are you from?</h2>
-                    <p class="step-desc">Tell us your city or country 🌍</p>
-                    <div class="input-group">
-                        <div class="input-field">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input type="text" id="cityInput" placeholder="Enter your city..." />
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                        <button type="button" class="btn-next" onclick="nextStep()">
-                            Next Step <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Step 4: Message -->
-                <div class="step" data-step="4">
-                    <div class="step-icon"><i class="fas fa-feather-pointed"></i></div>
-                    <h2>Your secret message</h2>
-                    <p class="step-desc">Say anything you want 💌</p>
-                    <div class="input-group">
-                        <div class="input-field textarea-field">
-                            <i class="fas fa-pencil-alt"></i>
-                            <textarea id="messageInput" placeholder="Write your message here..." rows="4" required></textarea>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                        <button type="submit" class="btn-submit" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </div>
-                </div>
-
             </form>
 
             <!-- Footer -->
-            <div class="footer">
-                <span><i class="fas fa-shield-halved"></i> Anonymous</span>
-                <span><i class="fas fa-bolt"></i> Instant</span>
-                <span><i class="fas fa-lock"></i> Secure</span>
+            <div class="footer-2026">
+                <div class="footer-left-2026">
+                    <span><i class="fas fa-shield-halved"></i> 256-bit</span>
+                    <span><i class="fas fa-bolt"></i> 0.2ms</span>
+                    <span><i class="fas fa-lock"></i> Encrypted</span>
+                </div>
+                <div class="footer-right-2026">
+                    <span class="vercel-2026">
+                        <i class="fas fa-check-circle"></i> v2.0.0
+                    </span>
+                </div>
             </div>
+        </div>
+
+        <div class="domain-2026">
+            <i class="fas fa-globe"></i>
+            <span>secret-message.vercel.app</span>
+            <span class="dot-2026">•</span>
+            <span class="source-2026">main · 2026</span>
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div id="toastContainer" class="toast-container"></div>
+    <div id="toastContainer" class="toast-2026-container"></div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('nameForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                showToast('Please enter your name', 'fa-exclamation-triangle', true);
+                return;
+            }
+            sessionStorage.setItem('userName', name);
+            window.location.href = 'age.html';
+        });
+
+        function showToast(message, icon, isError) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast-2026 ' + (isError ? 'error' : 'success');
+            toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('hide');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
