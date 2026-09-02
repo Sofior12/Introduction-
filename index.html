@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>contact · live notify</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telegram Bot · Live Notify</title>
   <!-- Font Awesome 6 (free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     * {
       margin: 0;
@@ -40,7 +40,6 @@
       box-shadow: 0 28px 48px -16px rgba(0, 30, 60, 0.3);
     }
 
-    /* header / avatar */
     .form-header {
       display: flex;
       align-items: center;
@@ -75,7 +74,6 @@
       letter-spacing: 0.3px;
     }
 
-    /* form */
     .input-group {
       margin-bottom: 1.4rem;
     }
@@ -157,7 +155,6 @@
       min-width: 140px;
     }
 
-    /* message field */
     .msg-field .input-field {
       border-radius: 28px;
       align-items: flex-start;
@@ -193,6 +190,14 @@
       padding: 0.2rem 0.9rem;
       border-radius: 50px;
       letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid #3a4c66;
+    }
+
+    .notify-row .badge:hover {
+      background: #2c405a;
+      transform: scale(0.97);
     }
 
     .notify-row .live-dot {
@@ -219,7 +224,6 @@
       align-items: center;
     }
 
-    /* button */
     .btn-submit {
       background: #0b1a2e;
       border: none;
@@ -256,12 +260,12 @@
       transform: scale(0.96);
     }
 
-    /* notify toast */
+    /* toast container */
     .toast-container {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      max-width: 340px;
+      max-width: 380px;
       width: 100%;
       z-index: 999;
       display: flex;
@@ -304,7 +308,6 @@
       to { opacity: 0; transform: translateY(30px); }
     }
 
-    /* extra subtle */
     .footnote {
       margin-top: 1.4rem;
       font-size: 0.7rem;
@@ -336,7 +339,34 @@
       border-bottom: 1px solid #1e293b;
     }
 
-    /* responsive */
+    /* telegram bot status */
+    .bot-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      background: #e4ebf3;
+      padding: 0.25rem 1.2rem 0.25rem 1.2rem;
+      border-radius: 60px;
+      color: #1e2c3e;
+      margin-top: 0.3rem;
+      justify-content: center;
+      border: 1px solid #cdd8e6;
+    }
+
+    .bot-status i {
+      color: #1e293b;
+    }
+
+    .bot-status .bot-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-right: 2px;
+    }
+
     @media (max-width: 480px) {
       .card { padding: 1.5rem; }
       .row-duo { flex-direction: column; gap: 0.2rem; }
@@ -344,162 +374,228 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <!-- header -->
-    <div class="form-header">
-      <i class="fas fa-pen-fancy"></i>
-      <h2>contact <span>v2</span></h2>
-    </div>
 
-    <!-- form -->
-    <form id="contactForm">
-      <!-- age -->
-      <div class="input-group">
-        <label><i class="far fa-calendar-alt" style="margin-right: 6px;"></i> Age</label>
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24">
-        </div>
-      </div>
-
-      <!-- row: telegram + instagram -->
-      <div class="row-duo">
-        <div class="input-group">
-          <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
-          <div class="input-field input-icon">
-            <span class="prefix">@</span>
-            <input type="text" id="telegramInput" placeholder="username" value="sofior_dev">
-          </div>
-        </div>
-        <div class="input-group">
-          <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
-          <div class="input-field input-icon">
-            <span class="prefix">@</span>
-            <input type="text" id="instagramInput" placeholder="username" value="sofior.ux">
-          </div>
-        </div>
-      </div>
-
-      <!-- message -->
-      <div class="input-group msg-field">
-        <label><i class="far fa-comment-dots"></i> Message</label>
-        <div class="input-field">
-          <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.3rem;"></i>
-          <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, nice contact page! 🔥</textarea>
-        </div>
-      </div>
-
-      <!-- live notification row (inspired by notify.js) -->
-      <div class="notify-row">
-        <div class="live-label">
-          <span class="live-dot"></span> live
-        </div>
-        <div style="display: flex; align-items: center; gap: 0.6rem;">
-          <i class="fas fa-bell" style="color: #1e293b;"></i>
-          <span class="badge"><i class="fas fa-code" style="margin-right: 4px;"></i> notify.js</span>
-        </div>
-      </div>
-
-      <!-- submit button -->
-      <button type="submit" class="btn-submit" id="submitBtn">
-        <i class="fas fa-paper-plane"></i> send message
-      </button>
-
-      <div class="footnote">
-        <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
-        <span><i class="fas fa-issue"></i> issues · PR</span>
-        <span><i class="fas fa-file-alt"></i> README</span>
-      </div>
-    </form>
+<div class="card">
+  <!-- header -->
+  <div class="form-header">
+    <i class="fab fa-telegram-plane"></i>
+    <h2>bot notify <span>live</span></h2>
   </div>
 
-  <!-- toast container -->
-  <div id="toastContainer" class="toast-container"></div>
+  <!-- form -->
+  <form id="contactForm">
+    <!-- age -->
+    <div class="input-group">
+      <label><i class="far fa-calendar-alt" style="margin-right: 6px;"></i> Age</label>
+      <div class="input-field">
+        <i class="fas fa-user"></i>
+        <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24" />
+      </div>
+    </div>
 
-  <script>
-    (function() {
-      "use strict";
+    <!-- row: telegram + instagram -->
+    <div class="row-duo">
+      <div class="input-group">
+        <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
+        <div class="input-field input-icon">
+          <span class="prefix">@</span>
+          <input type="text" id="telegramInput" placeholder="username" value="sofior_dev" />
+        </div>
+      </div>
+      <div class="input-group">
+        <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
+        <div class="input-field input-icon">
+          <span class="prefix">@</span>
+          <input type="text" id="instagramInput" placeholder="username" value="sofior.ux" />
+        </div>
+      </div>
+    </div>
 
-      const form = document.getElementById('contactForm');
-      const ageInput = document.getElementById('ageInput');
-      const telegramInput = document.getElementById('telegramInput');
-      const instagramInput = document.getElementById('instagramInput');
-      const messageInput = document.getElementById('messageInput');
-      const toastContainer = document.getElementById('toastContainer');
+    <!-- message -->
+    <div class="input-group msg-field">
+      <label><i class="far fa-comment-dots"></i> Message</label>
+      <div class="input-field">
+        <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.3rem;"></i>
+        <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, bot notification test! 🤖</textarea>
+      </div>
+    </div>
 
-      // show toast with message (auto dismiss)
-      function showToast(message, icon = 'fa-check-circle') {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
-        toastContainer.appendChild(toast);
+    <!-- live notify row + bot status -->
+    <div class="notify-row">
+      <div class="live-label">
+        <span class="live-dot"></span> live
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <i class="fas fa-robot" style="color: #1e293b;"></i>
+        <span class="badge" id="notifyBadge"><i class="fas fa-paper-plane" style="margin-right: 4px;"></i> bot API</span>
+      </div>
+    </div>
 
-        // auto remove after 4.5s
+    <!-- bot status (fake but shows api readiness) -->
+    <div class="bot-status">
+      <span class="bot-dot"></span> <i class="fas fa-check-circle" style="color: #1e7b3c;"></i> Telegram Bot API · ready (simulated)
+    </div>
+
+    <!-- submit -->
+    <button type="submit" class="btn-submit" id="submitBtn">
+      <i class="fas fa-paper-plane"></i> send to bot
+    </button>
+
+    <div class="footnote">
+      <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
+      <span><i class="fas fa-issue"></i> issues · PR</span>
+      <span><i class="fas fa-file-alt"></i> README</span>
+    </div>
+  </form>
+</div>
+
+<!-- toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script>
+  (function() {
+    "use strict";
+
+    // ---------- CONFIG ----------
+    // ⚠️ REPLACE WITH YOUR OWN BOT TOKEN AND CHAT ID
+    const BOT_TOKEN = '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // 👈 your bot token
+    const CHAT_ID = '123456789';                                         // 👈 your chat id (user or group)
+
+    // DOM refs
+    const form = document.getElementById('contactForm');
+    const ageInput = document.getElementById('ageInput');
+    const telegramInput = document.getElementById('telegramInput');
+    const instagramInput = document.getElementById('instagramInput');
+    const messageInput = document.getElementById('messageInput');
+    const toastContainer = document.getElementById('toastContainer');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // ---------- toast system ----------
+    function showToast(message, icon = 'fa-check-circle', isError = false) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      if (isError) {
+        toast.style.borderLeftColor = '#ef4444';
+      }
+      toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('hide');
         setTimeout(() => {
-          toast.classList.add('hide');
-          setTimeout(() => {
-            if (toast.parentNode) toast.remove();
-          }, 300);
-        }, 4000);
+          if (toast.parentNode) toast.remove();
+        }, 300);
+      }, 5000);
+    }
+
+    // ---------- send message to Telegram bot via API ----------
+    async function sendToTelegramBot(text) {
+      if (!BOT_TOKEN || BOT_TOKEN === '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx') {
+        // demo mode: simulate success but warn user
+        console.warn('⚠️ Telegram bot token not configured. Using demo mode.');
+        showToast('🔔 [DEMO] Bot notification: ' + text, 'fa-bell');
+        return true; // pretend success
       }
 
-      // form submit handler — "gandu jeisa website" but with live notification :)
-      function handleSubmit(e) {
-        e.preventDefault();
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      const payload = {
+        chat_id: CHAT_ID,
+        text: text,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+      };
 
-        // gather values (trim)
-        const age = ageInput.value.trim() || 'not provided';
-        const telegram = telegramInput.value.trim() || 'username';
-        const instagram = instagramInput.value.trim() || 'username';
-        const message = messageInput.value.trim() || '(empty message)';
-
-        // Build a nice notification message
-        const preview = message.length > 40 ? message.slice(0, 40) + '…' : message;
-        const summary = `📬 from @${telegram} (${age}y) · “${preview}”`;
-
-        // show toast with live notification style
-        showToast(summary, 'fa-bell');
-
-        // also log to console (like a real "notify.js" would)
-        console.log('[notify.js] 🟢 NEW MESSAGE:');
-        console.log(`  • age: ${age}`);
-        console.log(`  • telegram: @${telegram}`);
-        console.log(`  • instagram: @${instagram}`);
-        console.log(`  • message: ${message}`);
-        console.log('  — delivered (simulated)');
-
-        // (optional) small haptic feedback
-        const btn = document.getElementById('submitBtn');
-        btn.style.transform = 'scale(0.96)';
-        setTimeout(() => btn.style.transform = '', 150);
-      }
-
-      form.addEventListener('submit', handleSubmit);
-
-      // extra: dummy live notification on load? (just to show the "live" feel)
-      window.addEventListener('load', function() {
-        // show a welcome toast after 1.2s (like a live ping)
-        setTimeout(() => {
-          showToast('🟢 notify.js · ready for messages', 'fa-circle');
-        }, 800);
-      });
-
-      // also if someone clicks on the "notify.js" badge — show a little ping
-      const notifyBadge = document.querySelector('.notify-row .badge');
-      if (notifyBadge) {
-        notifyBadge.addEventListener('click', function(e) {
-          e.stopPropagation();
-          showToast('🔔 notify.js · live listener active', 'fa-bolt');
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
         });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          showToast('✅ Telegram bot notification sent!', 'fa-check-circle');
+          return true;
+        } else {
+          console.error('Telegram API error:', data);
+          showToast('❌ Bot error: ' + (data.description || 'unknown'), 'fa-exclamation-triangle', true);
+          return false;
+        }
+      } catch (err) {
+        console.error('Network error:', err);
+        showToast('⚠️ Network error. Check console.', 'fa-exclamation-triangle', true);
+        return false;
       }
+    }
 
-      // optional: show age on change
-      ageInput.addEventListener('change', function() {
-        // just a subtle console log (like a debug)
-        console.log(`[age] updated: ${this.value}`);
+    // ---------- build message from form ----------
+    function buildBotMessage() {
+      const age = ageInput.value.trim() || 'not provided';
+      const telegram = telegramInput.value.trim() || 'username';
+      const instagram = instagramInput.value.trim() || 'username';
+      const message = messageInput.value.trim() || '(empty message)';
+
+      // Escape HTML for Telegram
+      const escape = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      return `<b>📬 New contact message</b>\n` +
+             `👤 Age: ${escape(age)}\n` +
+             `📱 Telegram: @${escape(telegram)}\n` +
+             `📸 Instagram: @${escape(instagram)}\n` +
+             `💬 Message:\n${escape(message)}`;
+    }
+
+    // ---------- form submit handler ----------
+    async function handleSubmit(e) {
+      e.preventDefault();
+
+      // Disable button to prevent double send
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> sending...`;
+
+      const text = buildBotMessage();
+
+      // Show "sending" toast
+      showToast('📤 Sending to Telegram bot ...', 'fa-paper-plane');
+
+      // Actually send via Telegram API
+      const success = await sendToTelegramBot(text);
+
+      // re-enable button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> send to bot`;
+
+      // if success, we already show toast; else error toast shown inside function
+      if (success) {
+        // small extra feedback
+        console.log('[notify.js] bot message delivered');
+      }
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
+    // ---------- badge click: test ping ----------
+    const badge = document.getElementById('notifyBadge');
+    if (badge) {
+      badge.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // send a test ping to bot (with a simple "ping" message)
+        const pingMsg = `🔔 <b>Ping from contact page</b>\n@${telegramInput.value || 'user'} just clicked the bot badge.`;
+        sendToTelegramBot(pingMsg);
+        showToast('🔔 test ping sent to bot', 'fa-bolt');
       });
+    }
 
-    })();
-  </script>
+    // ---------- on load: welcome toast (simulate live) ----------
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        showToast('🟢 Bot API · ready (simulated)', 'fa-circle');
+      }, 800);
+    });
+
+  })();
+</script>
+
 </body>
 </html>
