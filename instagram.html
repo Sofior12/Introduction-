@@ -90,3 +90,51 @@
                     <div class="apple-input-wrap">
                         <div class="apple-input glass-input">
                             <i class="fab fa-instagram" style="color:rgba(255,255,255,0.2);"></i>
+                            <input type="text" id="instagramInput" placeholder="@username" style="color:#fff;" />
+                        </div>
+                    </div>
+                    <div class="apple-btn-group">
+                        <a href="city.html" class="apple-btn glass-btn">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
+                        <button type="submit" class="apple-btn colorful-primary">
+                            Continue <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="apple-footer" style="border-top-color:rgba(255,255,255,0.04);">
+                <div class="apple-footer-left">
+                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-shield-alt" style="color:rgba(139,92,246,0.3);"></i> 256-bit</span>
+                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-bolt" style="color:rgba(251,146,60,0.3);"></i> 0.2ms</span>
+                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-lock" style="color:rgba(6,182,212,0.3);"></i> Encrypted</span>
+                </div>
+                <div class="apple-footer-right">
+                    <span class="apple-vercel" style="color:rgba(255,255,255,0.1);">
+                        <i class="fas fa-check-circle" style="color:#34c759;"></i> v2.0.0
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="apple-domain" style="color:rgba(255,255,255,0.05);">
+            <i class="fas fa-globe"></i>
+            <span>secret-message.vercel.app</span>
+            <span class="apple-dot-domain">•</span>
+            <span class="apple-source">main · 2026</span>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="apple-toast-container"></div>
+
+    <script>
+        document.getElementById('instagramForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const instagram = document.getElementById('instagramInput').value.trim();
+            sessionStorage.setItem('userInstagram', instagram || 'Not specified');
+            window.location.href = 'message.html';
+        });
+    </script>
+</body>
+</html>
