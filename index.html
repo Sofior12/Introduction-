@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>✨ Secret Message · Secure</title>
+    <title>✨ Secret Message · Colorful</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -11,42 +11,45 @@
 <body>
 
     <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-        <div class="orb orb3"></div>
-        <div class="orb orb4"></div>
+    <div class="bg-container">
+        <div class="gradient-orb orb1"></div>
+        <div class="gradient-orb orb2"></div>
+        <div class="gradient-orb orb3"></div>
+        <div class="gradient-orb orb4"></div>
     </div>
 
     <div class="container">
-        <div class="card glass">
+        <div class="card">
+
             <!-- Header -->
             <div class="header">
-                <div class="icon-wrapper pulse">
+                <div class="icon-wrapper">
                     <i class="fas fa-comment-dots"></i>
                 </div>
                 <h1>Secret <span>Message</span></h1>
-                <p class="subtitle">Step <span id="stepDisplay" class="highlight">1</span> of 4</p>
+                <p class="step-info">Step <span id="stepDisplay" class="highlight">1</span> of <span id="totalSteps">4</span></p>
             </div>
 
             <!-- Progress Bar -->
             <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-track">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
                 <div class="steps-indicator">
                     <div class="step-dot active" data-step="1">
-                        <i class="fas fa-user"></i>
+                        <span class="dot-num">1</span>
                         <span class="dot-label">Name</span>
                     </div>
                     <div class="step-dot" data-step="2">
-                        <i class="fas fa-calendar-alt"></i>
+                        <span class="dot-num">2</span>
                         <span class="dot-label">Age</span>
                     </div>
                     <div class="step-dot" data-step="3">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="dot-num">3</span>
                         <span class="dot-label">City</span>
                     </div>
                     <div class="step-dot" data-step="4">
-                        <i class="fas fa-pencil-alt"></i>
+                        <span class="dot-num">4</span>
                         <span class="dot-label">Message</span>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
                     <h2>What's your name?</h2>
                     <p class="step-desc">Don't worry, it's completely anonymous ✨</p>
                     <div class="input-group">
-                        <div class="input-field glow">
+                        <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" id="nameInput" placeholder="Enter your name..." required />
                         </div>
@@ -75,15 +78,17 @@
                 <div class="step" data-step="2">
                     <div class="step-icon"><i class="fas fa-cake-candles"></i></div>
                     <h2>How old are you?</h2>
-                    <p class="step-desc">Just for fun 🎂</p>
+                    <p class="step-desc">Just for fun 🎉</p>
                     <div class="input-group">
-                        <div class="input-field glow">
+                        <div class="input-field">
                             <i class="fas fa-calendar-alt"></i>
                             <input type="number" id="ageInput" placeholder="Enter your age..." min="1" max="120" />
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-prev" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
                         <button type="button" class="btn-next" onclick="nextStep()">
                             Next Step <i class="fas fa-arrow-right"></i>
                         </button>
@@ -96,13 +101,15 @@
                     <h2>Where are you from?</h2>
                     <p class="step-desc">Tell us your city or country 🌍</p>
                     <div class="input-group">
-                        <div class="input-field glow">
+                        <div class="input-field">
                             <i class="fas fa-map-marker-alt"></i>
                             <input type="text" id="cityInput" placeholder="Enter your city..." />
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-prev" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
                         <button type="button" class="btn-next" onclick="nextStep()">
                             Next Step <i class="fas fa-arrow-right"></i>
                         </button>
@@ -115,15 +122,17 @@
                     <h2>Your secret message</h2>
                     <p class="step-desc">Say anything you want 💌</p>
                     <div class="input-group">
-                        <div class="input-field glow textarea-field">
+                        <div class="input-field textarea-field">
                             <i class="fas fa-pencil-alt"></i>
                             <textarea id="messageInput" placeholder="Write your message here..." rows="4" required></textarea>
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-prev" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
                         <button type="submit" class="btn-submit" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i> Send Secret
+                            <i class="fas fa-paper-plane"></i> Send Message
                         </button>
                     </div>
                 </div>
@@ -132,22 +141,15 @@
 
             <!-- Footer -->
             <div class="footer">
-                <span><i class="fas fa-shield-halved"></i> 100% Anonymous</span>
-                <span><i class="fas fa-bolt"></i> Instant Notification</span>
-                <span><i class="fas fa-lock"></i> 🔒 Secure</span>
+                <span><i class="fas fa-shield-halved"></i> Anonymous</span>
+                <span><i class="fas fa-bolt"></i> Instant</span>
+                <span><i class="fas fa-lock"></i> Secure</span>
             </div>
         </div>
     </div>
 
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
-
-    <!-- Floating Particles -->
-    <div class="particles">
-        <span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span>
-    </div>
 
     <script src="script.js"></script>
 </body>
