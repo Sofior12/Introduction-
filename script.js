@@ -14,7 +14,7 @@
     const progressBar = document.getElementById('progressBar');
     const toastContainer = document.getElementById('toastContainer');
 
-    // ----- Show Step -----
+    // ===== SHOW STEP =====
     function showStep(step) {
         document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
         document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
@@ -29,18 +29,27 @@
         stepDisplay.textContent = step;
         progressBar.style.width = ((step / totalSteps) * 100) + '%';
         currentStep = step;
+
+        const firstInput = document.querySelector(`.step[data-step="${step}"] input, .step[data-step="${step}"] textarea`);
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 300);
+        }
     }
 
-    // ----- Next Step -----
+    // ===== NEXT STEP =====
     window.nextStep = function() {
         if (currentStep === 1 && !nameInput.value.trim()) {
             showToast('⚠️ Please enter your name.', 'fa-exclamation-triangle', true);
             nameInput.focus();
+            nameInput.parentElement.style.borderColor = '#ef4444';
+            setTimeout(() => nameInput.parentElement.style.borderColor = '', 2000);
             return;
         }
         if (currentStep === 4 && !messageInput.value.trim()) {
             showToast('⚠️ Please write a message.', 'fa-exclamation-triangle', true);
             messageInput.focus();
+            messageInput.parentElement.style.borderColor = '#ef4444';
+            setTimeout(() => messageInput.parentElement.style.borderColor = '', 2000);
             return;
         }
         if (currentStep < totalSteps) {
@@ -48,14 +57,14 @@
         }
     };
 
-    // ----- Previous Step -----
+    // ===== PREVIOUS STEP =====
     window.prevStep = function() {
         if (currentStep > 1) {
             showStep(currentStep - 1);
         }
     };
 
-    // ----- Toast -----
+    // ===== TOAST =====
     function showToast(message, icon = 'fa-check-circle', isError = false) {
         const toast = document.createElement('div');
         toast.className = 'toast ' + (isError ? 'error' : 'success');
@@ -68,7 +77,7 @@
         }, 5000);
     }
 
-    // ----- Send via Vercel API (Secure - No Token in Frontend) -----
+    // ===== SEND VIA API =====
     async function sendToTelegram(message) {
         try {
             const response = await fetch('/api/send', {
@@ -76,43 +85,40 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: message })
             });
-
             const data = await response.json();
 
             if (data.ok) {
                 showToast('✨ Secret message sent successfully!', 'fa-check-circle');
                 return true;
             } else {
-                console.error('API error:', data);
-                showToast('❌ Error: ' + (data.error || 'Unknown'), 'fa-exclamation-triangle', true);
+                showToast('❌ ' + (data.error || 'Error'), 'fa-exclamation-triangle', true);
                 return false;
             }
         } catch (err) {
-            console.error('Network error:', err);
             showToast('⚠️ Network error. Please try again.', 'fa-exclamation-triangle', true);
             return false;
         }
     }
 
-    // ----- Build Message -----
+    // ===== BUILD MESSAGE =====
     function buildMessage() {
         const name = nameInput.value.trim() || 'Anonymous';
         const age = ageInput.value.trim() || 'Not specified';
         const city = cityInput.value.trim() || 'Not specified';
         const message = messageInput.value.trim() || '(No message)';
 
-        return `<b>📩✨ New Secret Message</b>\n` +
+        return `<b>📩 New Secret Message</b>\n` +
                `━━━━━━━━━━━━━━━━━━━━\n` +
-               `👤 <b>Name:</b> ${name}\n` +
-               `📅 <b>Age:</b> ${age}\n` +
-               `📍 <b>City:</b> ${city}\n` +
+               `👤 Name: ${name}\n` +
+               `📅 Age: ${age}\n` +
+               `📍 City: ${city}\n` +
                `━━━━━━━━━━━━━━━━━━━━\n` +
-               `💬 <b>Message:</b>\n${message}\n` +
+               `💬 Message:\n${message}\n` +
                `━━━━━━━━━━━━━━━━━━━━\n` +
                `🕐 ${new Date().toLocaleString()}`;
     }
 
-    // ----- Form Submit -----
+    // ===== FORM SUBMIT =====
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -125,8 +131,6 @@
         submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Sending...`;
 
         const message = buildMessage();
-        showToast('📤 Sending your secret message...', 'fa-paper-plane');
-
         const success = await sendToTelegram(message);
 
         if (success) {
@@ -138,10 +142,10 @@
         }
 
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Send Secret`;
+        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Send Message`;
     }
 
-    // ----- Enter key support -----
+    // ===== ENTER KEY =====
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             const activeStep = document.querySelector('.step.active');
@@ -149,10 +153,12 @@
                 const stepNum = parseInt(activeStep.dataset.step);
                 if (stepNum === 4) {
                     if (e.target === messageInput) {
+                        e.preventDefault();
                         form.dispatchEvent(new Event('submit'));
                     }
                 } else {
                     if (e.target.tagName === 'INPUT') {
+                        e.preventDefault();
                         window.nextStep();
                     }
                 }
@@ -160,12 +166,12 @@
         }
     });
 
-    // ----- Initialize -----
+    // ===== INIT =====
     showStep(1);
     form.addEventListener('submit', handleSubmit);
 
     setTimeout(() => {
-        showToast('🔒 Secure & Anonymous', 'fa-shield-halved');
+        showToast('🌟 Step 1 of 4 · Enter your name', 'fa-info-circle');
     }, 600);
 
 })();
