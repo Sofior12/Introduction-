@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "secret-message",
+    "name": "secret-message-colorful",
     "builds": [
         { "src": "api/*.js", "use": "@vercel/node" },
         { "src": "*.html", "use": "@vercel/static" }
