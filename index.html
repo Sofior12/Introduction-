@@ -3,269 +3,503 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Introduction</title>
-
+  <title>contact · live notify</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
-      margin: 0;
-      padding: 40px 20px;
       min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #111;
+      background: linear-gradient(145deg, #f6f9fc 0%, #eef2f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
     }
 
-    .container {
+    .card {
+      max-width: 560px;
       width: 100%;
-      max-width: 625px;
-      margin: 110px auto 0;
-      padding: 55px 50px 45px;
-      background: #fff;
-      border-radius: 28px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 2.5rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25), 0 8px 24px -8px rgba(0,0,0,0.08);
+      padding: 2rem 2rem 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.2s ease;
     }
 
-    h1 {
-      margin: 0 0 45px;
-      text-align: center;
-      font-size: 48px;
-      line-height: 1.1;
+    .card:hover {
+      box-shadow: 0 28px 48px -16px rgba(0, 30, 60, 0.3);
     }
 
-    .field {
-      margin-bottom: 30px;
+    /* header / avatar */
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
     }
 
-    label {
-      display: block;
-      margin-bottom: 12px;
-      font-size: 27px;
-      font-weight: 700;
+    .form-header i {
+      font-size: 1.8rem;
+      color: #1e293b;
+      background: #d9e2ef;
+      padding: 0.6rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
     }
 
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 15px;
-      padding: 18px 23px;
-      font-size: 24px;
-      font-family: inherit;
-      outline: none;
-      background: #fff;
-      color: #111;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #111;
-    }
-
-    textarea {
-      min-height: 210px;
-      resize: vertical;
-    }
-
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 20px;
-      background: #111;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    #status {
-      margin-top: 28px;
-      text-align: center;
-      font-size: 24px;
+    .form-header h2 {
+      font-size: 1.6rem;
       font-weight: 600;
-      word-break: break-word;
+      letter-spacing: -0.02em;
+      color: #0b1a2e;
     }
 
-    .success {
-      color: #16803c;
+    .form-header span {
+      background: #1e293b;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.7rem;
+      border-radius: 40px;
+      margin-left: 0.3rem;
+      letter-spacing: 0.3px;
     }
 
-    .error {
-      color: #c62828;
+    /* form */
+    .input-group {
+      margin-bottom: 1.4rem;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 20px 10px;
-      }
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #334155;
+      margin-bottom: 0.3rem;
+    }
 
-      .container {
-        margin-top: 130px;
-        padding: 45px 35px 35px;
-        border-radius: 25px;
-      }
+    .input-field {
+      width: 100%;
+      background: white;
+      border: 1px solid #dbe0e8;
+      border-radius: 60px;
+      padding: 0.75rem 1.4rem;
+      font-size: 0.95rem;
+      color: #0b1a2e;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-      h1 {
-        font-size: 42px;
-      }
+    .input-field i {
+      color: #6b7a8f;
+      font-size: 1rem;
+      width: 1.4rem;
+      text-align: center;
+    }
 
-      label {
-        font-size: 25px;
-      }
+    .input-field input,
+    .input-field textarea {
+      border: none;
+      outline: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.95rem;
+      color: #0b1a2e;
+      resize: vertical;
+      font-family: inherit;
+    }
 
-      input,
-      textarea {
-        font-size: 21px;
-      }
+    .input-field textarea {
+      min-height: 70px;
+      padding: 0.3rem 0;
+      line-height: 1.5;
+    }
 
-      button {
-        font-size: 25px;
-      }
+    .input-field:focus-within {
+      border-color: #1e293b;
+      box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08);
+      background: #ffffff;
+    }
+
+    .input-field.input-icon {
+      padding-left: 0.8rem;
+    }
+
+    .input-field .prefix {
+      color: #5f6f84;
+      font-weight: 450;
+      font-size: 0.9rem;
+    }
+
+    .row-duo {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .row-duo .input-group {
+      flex: 1 1 0;
+      min-width: 140px;
+    }
+
+    /* message field */
+    .msg-field .input-field {
+      border-radius: 28px;
+      align-items: flex-start;
+      padding-top: 0.9rem;
+    }
+
+    .msg-field .input-field i {
+      margin-top: 0.1rem;
+    }
+
+    /* notify row */
+    .notify-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eef3f9;
+      padding: 0.45rem 1.2rem 0.45rem 1.6rem;
+      border-radius: 100px;
+      margin: 1.8rem 0 1.2rem;
+      border: 1px solid #d3dce8;
+    }
+
+    .notify-row i {
+      color: #1e293b;
+      font-size: 1.1rem;
+    }
+
+    .notify-row .badge {
+      background: #1e293b;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.9rem;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+    }
+
+    .notify-row .live-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .notify-row .live-label {
+      font-weight: 500;
+      color: #0f2a40;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* button */
+    .btn-submit {
+      background: #0b1a2e;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: 0.2s;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(11, 26, 46, 0.2);
+      border: 1px solid #2c3d57;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-submit i {
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #1f3147;
+      transform: scale(0.98);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .btn-submit:active {
+      background: #0a1628;
+      transform: scale(0.96);
+    }
+
+    /* notify toast */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      max-width: 340px;
+      width: 100%;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #0b1a2e;
+      color: #f0f5fe;
+      padding: 0.9rem 1.5rem;
+      border-radius: 60px;
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.3);
+      font-size: 0.9rem;
+      font-weight: 450;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      backdrop-filter: blur(4px);
+      border-left: 4px solid #22c55e;
+      animation: slideUp 0.35s ease;
+      transform-origin: bottom;
+    }
+
+    .toast i {
+      color: #22c55e;
+      font-size: 1.3rem;
+    }
+
+    .toast.hide {
+      animation: slideDown 0.25s ease forwards;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(30px); }
+    }
+
+    /* extra subtle */
+    .footnote {
+      margin-top: 1.4rem;
+      font-size: 0.7rem;
+      text-align: center;
+      color: #6d7d92;
+      letter-spacing: 0.2px;
+      border-top: 1px solid #d9e2ef;
+      padding-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .footnote i {
+      margin-right: 4px;
+      color: #3d526b;
+    }
+
+    .footnote a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #b0c4db;
+    }
+
+    .footnote a:hover {
+      color: #000;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    /* responsive */
+    @media (max-width: 480px) {
+      .card { padding: 1.5rem; }
+      .row-duo { flex-direction: column; gap: 0.2rem; }
     }
   </style>
 </head>
-
 <body>
+  <div class="card">
+    <!-- header -->
+    <div class="form-header">
+      <i class="fas fa-pen-fancy"></i>
+      <h2>contact <span>v2</span></h2>
+    </div>
 
-  <div class="container">
-
-    <h1>Introduction</h1>
-
-    <form id="introForm">
-
-      <div class="field">
-        <label for="age">Age</label>
-        <input
-          type="number"
-          id="age"
-          name="age"
-          placeholder="Enter your age"
-          min="1"
-          max="120"
-          required
-        >
+    <!-- form -->
+    <form id="contactForm">
+      <!-- age -->
+      <div class="input-group">
+        <label><i class="far fa-calendar-alt" style="margin-right: 6px;"></i> Age</label>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24">
+        </div>
       </div>
 
-      <div class="field">
-        <label for="telegram">Telegram</label>
-        <input
-          type="text"
-          id="telegram"
-          name="telegram"
-          placeholder="@username"
-        >
+      <!-- row: telegram + instagram -->
+      <div class="row-duo">
+        <div class="input-group">
+          <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
+          <div class="input-field input-icon">
+            <span class="prefix">@</span>
+            <input type="text" id="telegramInput" placeholder="username" value="sofior_dev">
+          </div>
+        </div>
+        <div class="input-group">
+          <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
+          <div class="input-field input-icon">
+            <span class="prefix">@</span>
+            <input type="text" id="instagramInput" placeholder="username" value="sofior.ux">
+          </div>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="instagram">Instagram</label>
-        <input
-          type="text"
-          id="instagram"
-          name="instagram"
-          placeholder="@username"
-        >
+      <!-- message -->
+      <div class="input-group msg-field">
+        <label><i class="far fa-comment-dots"></i> Message</label>
+        <div class="input-field">
+          <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.3rem;"></i>
+          <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, nice contact page! 🔥</textarea>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Write your message..."
-          required
-        ></textarea>
+      <!-- live notification row (inspired by notify.js) -->
+      <div class="notify-row">
+        <div class="live-label">
+          <span class="live-dot"></span> live
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <i class="fas fa-bell" style="color: #1e293b;"></i>
+          <span class="badge"><i class="fas fa-code" style="margin-right: 4px;"></i> notify.js</span>
+        </div>
       </div>
 
-      <button type="submit" id="sendBtn">
-        Send Introduction
+      <!-- submit button -->
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <i class="fas fa-paper-plane"></i> send message
       </button>
 
-      <div id="status"></div>
-
+      <div class="footnote">
+        <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
+        <span><i class="fas fa-issue"></i> issues · PR</span>
+        <span><i class="fas fa-file-alt"></i> README</span>
+      </div>
     </form>
   </div>
 
+  <!-- toast container -->
+  <div id="toastContainer" class="toast-container"></div>
 
   <script>
-    const form = document.getElementById("introForm");
-    const button = document.getElementById("sendBtn");
-    const status = document.getElementById("status");
+    (function() {
+      "use strict";
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const ageInput = document.getElementById('ageInput');
+      const telegramInput = document.getElementById('telegramInput');
+      const instagramInput = document.getElementById('instagramInput');
+      const messageInput = document.getElementById('messageInput');
+      const toastContainer = document.getElementById('toastContainer');
 
-      button.disabled = true;
-      button.textContent = "Sending...";
-      status.textContent = "";
-      status.className = "";
+      // show toast with message (auto dismiss)
+      function showToast(message, icon = 'fa-check-circle') {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+        toastContainer.appendChild(toast);
 
-      const data = Object.fromEntries(
-        new FormData(form).entries()
-      );
-
-      try {
-        const response = await fetch("/api/notify", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-
-        const contentType =
-          response.headers.get("content-type") || "";
-
-        let result;
-
-        if (contentType.includes("application/json")) {
-          result = await response.json();
-        } else {
-          const text = await response.text();
-
-          throw new Error(
-            text || `Server returned HTTP ${response.status}`
-          );
-        }
-
-        if (!response.ok || !result.success) {
-          throw new Error(
-            result.error || "Something went wrong"
-          );
-        }
-
-        form.reset();
-
-        status.textContent =
-          "✓ Introduction sent successfully!";
-
-        status.className = "success";
-
-      } catch (error) {
-
-        console.error("Request error:", error);
-
-        status.textContent =
-          "✕ " + (error.message || "Request failed");
-
-        status.className = "error";
-
-      } finally {
-
-        button.disabled = false;
-        button.textContent = "Send Introduction";
+        // auto remove after 4.5s
+        setTimeout(() => {
+          toast.classList.add('hide');
+          setTimeout(() => {
+            if (toast.parentNode) toast.remove();
+          }, 300);
+        }, 4000);
       }
-    });
-  </script>
 
+      // form submit handler — "gandu jeisa website" but with live notification :)
+      function handleSubmit(e) {
+        e.preventDefault();
+
+        // gather values (trim)
+        const age = ageInput.value.trim() || 'not provided';
+        const telegram = telegramInput.value.trim() || 'username';
+        const instagram = instagramInput.value.trim() || 'username';
+        const message = messageInput.value.trim() || '(empty message)';
+
+        // Build a nice notification message
+        const preview = message.length > 40 ? message.slice(0, 40) + '…' : message;
+        const summary = `📬 from @${telegram} (${age}y) · “${preview}”`;
+
+        // show toast with live notification style
+        showToast(summary, 'fa-bell');
+
+        // also log to console (like a real "notify.js" would)
+        console.log('[notify.js] 🟢 NEW MESSAGE:');
+        console.log(`  • age: ${age}`);
+        console.log(`  • telegram: @${telegram}`);
+        console.log(`  • instagram: @${instagram}`);
+        console.log(`  • message: ${message}`);
+        console.log('  — delivered (simulated)');
+
+        // (optional) small haptic feedback
+        const btn = document.getElementById('submitBtn');
+        btn.style.transform = 'scale(0.96)';
+        setTimeout(() => btn.style.transform = '', 150);
+      }
+
+      form.addEventListener('submit', handleSubmit);
+
+      // extra: dummy live notification on load? (just to show the "live" feel)
+      window.addEventListener('load', function() {
+        // show a welcome toast after 1.2s (like a live ping)
+        setTimeout(() => {
+          showToast('🟢 notify.js · ready for messages', 'fa-circle');
+        }, 800);
+      });
+
+      // also if someone clicks on the "notify.js" badge — show a little ping
+      const notifyBadge = document.querySelector('.notify-row .badge');
+      if (notifyBadge) {
+        notifyBadge.addEventListener('click', function(e) {
+          e.stopPropagation();
+          showToast('🔔 notify.js · live listener active', 'fa-bolt');
+        });
+      }
+
+      // optional: show age on change
+      ageInput.addEventListener('change', function() {
+        // just a subtle console log (like a debug)
+        console.log(`[age] updated: ${this.value}`);
+      });
+
+    })();
+  </script>
 </body>
 </html>
