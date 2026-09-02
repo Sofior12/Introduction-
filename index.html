@@ -3,114 +3,151 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub · Telegram Bot Notify</title>
+    <title>✨ Secret Message · Secure</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="card">
-        <!-- GitHub Header -->
-        <div class="github-header">
-            <i class="fab fa-github"></i>
-            <h1>github.com/Sofior12/li <span>webhook</span></h1>
-        </div>
-
-        <div class="repo-badge">
-            <i class="fas fa-code-branch"></i> main · <i class="fas fa-issue"></i> issues · <i class="fas fa-pull-request"></i> PR
-        </div>
-
-        <!-- Introduction (owner) -->
-        <div class="intro-section">
-            <div class="avatar-row">
-                <div class="avatar">
-                    <i class="fas fa-user-astronaut"></i>
-                </div>
-                <div class="intro-text">
-                    <h3>Sofior <span style="color: #8b949e; font-weight: 400;">/ li</span></h3>
-                    <p><i class="fas fa-code" style="color: #58a6ff;"></i> full-stack · ui/ux</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Share Link (dusra admi ka intro) -->
-        <div class="link-section">
-            <label><i class="fas fa-link" style="margin-right: 6px;"></i> share introduction link</label>
-            <div class="link-input-wrapper">
-                <input type="url" id="linkInput" placeholder="https://your-intro-page.com" value="https://github.com/Sofior12" />
-                <button id="shareLinkBtn" class="github-btn"><i class="fab fa-github"></i> share via bot</button>
-            </div>
-            <div style="font-size: 0.7rem; color: #484f58; margin-top: 0.4rem; text-align: center;">
-                <i class="fas fa-info-circle"></i> link will be sent via Telegram Bot API
-            </div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="form-header">
-            <i class="fas fa-paper-plane"></i>
-            <h2>send notification <span>bot</span></h2>
-        </div>
-
-        <form id="contactForm">
-            <div class="input-group">
-                <label><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> Age</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24" />
-                </div>
-            </div>
-
-            <div class="row-duo">
-                <div class="input-group">
-                    <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
-                    <div class="input-field">
-                        <span class="prefix">@</span>
-                        <input type="text" id="telegramInput" placeholder="username" value="sofior_dev" />
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
-                    <div class="input-field">
-                        <span class="prefix">@</span>
-                        <input type="text" id="instagramInput" placeholder="username" value="sofior.ux" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-group msg-field">
-                <label><i class="far fa-comment-dots"></i> Message</label>
-                <div class="input-field">
-                    <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.15rem;"></i>
-                    <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, check my intro! 🚀</textarea>
-                </div>
-            </div>
-
-            <div class="notify-row">
-                <div class="live-label">
-                    <span class="live-dot"></span> live
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-robot" style="color: #8b949e;"></i>
-                    <span class="badge" id="notifyBadge"><i class="fas fa-paper-plane" style="margin-right: 4px;"></i> bot API</span>
-                </div>
-            </div>
-
-            <div class="bot-status">
-                <span class="bot-dot"></span> <i class="fas fa-check-circle" style="color: #3fb950;"></i> Telegram Bot · ready
-            </div>
-
-            <button type="submit" class="btn-submit" id="submitBtn">
-                <i class="fas fa-paper-plane"></i> send to bot
-            </button>
-
-            <div class="footnote">
-                <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
-                <span><i class="fas fa-issue"></i> issues · PR</span>
-                <span><i class="fas fa-file-alt"></i> README</span>
-            </div>
-        </form>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="orb orb4"></div>
     </div>
 
+    <div class="container">
+        <div class="card glass">
+            <!-- Header -->
+            <div class="header">
+                <div class="icon-wrapper pulse">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <h1>Secret <span>Message</span></h1>
+                <p class="subtitle">Step <span id="stepDisplay" class="highlight">1</span> of 4</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="steps-indicator">
+                    <div class="step-dot active" data-step="1">
+                        <i class="fas fa-user"></i>
+                        <span class="dot-label">Name</span>
+                    </div>
+                    <div class="step-dot" data-step="2">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="dot-label">Age</span>
+                    </div>
+                    <div class="step-dot" data-step="3">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="dot-label">City</span>
+                    </div>
+                    <div class="step-dot" data-step="4">
+                        <i class="fas fa-pencil-alt"></i>
+                        <span class="dot-label">Message</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="messageForm">
+
+                <!-- Step 1: Name -->
+                <div class="step active" data-step="1">
+                    <div class="step-icon"><i class="fas fa-user-astronaut"></i></div>
+                    <h2>What's your name?</h2>
+                    <p class="step-desc">Don't worry, it's completely anonymous ✨</p>
+                    <div class="input-group">
+                        <div class="input-field glow">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="nameInput" placeholder="Enter your name..." required />
+                        </div>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextStep()">
+                        Next Step <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Step 2: Age -->
+                <div class="step" data-step="2">
+                    <div class="step-icon"><i class="fas fa-cake-candles"></i></div>
+                    <h2>How old are you?</h2>
+                    <p class="step-desc">Just for fun 🎂</p>
+                    <div class="input-group">
+                        <div class="input-field glow">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="number" id="ageInput" placeholder="Enter your age..." min="1" max="120" />
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">
+                            Next Step <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: City -->
+                <div class="step" data-step="3">
+                    <div class="step-icon"><i class="fas fa-globe-asia"></i></div>
+                    <h2>Where are you from?</h2>
+                    <p class="step-desc">Tell us your city or country 🌍</p>
+                    <div class="input-group">
+                        <div class="input-field glow">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="cityInput" placeholder="Enter your city..." />
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">
+                            Next Step <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Message -->
+                <div class="step" data-step="4">
+                    <div class="step-icon"><i class="fas fa-feather-pointed"></i></div>
+                    <h2>Your secret message</h2>
+                    <p class="step-desc">Say anything you want 💌</p>
+                    <div class="input-group">
+                        <div class="input-field glow textarea-field">
+                            <i class="fas fa-pencil-alt"></i>
+                            <textarea id="messageInput" placeholder="Write your message here..." rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Secret
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span><i class="fas fa-shield-halved"></i> 100% Anonymous</span>
+                <span><i class="fas fa-bolt"></i> Instant Notification</span>
+                <span><i class="fas fa-lock"></i> 🔒 Secure</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
 
     <script src="script.js"></script>
 </body>
