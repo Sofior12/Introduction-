@@ -1,651 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sofior · intro + bot notify</title>
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction · share your link</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
 
-    body {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #f6f9fc 0%, #eef2f7 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
 
-    .card {
-      max-width: 600px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: 2.8rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25), 0 8px 24px -8px rgba(0,0,0,0.08);
-      padding: 2.2rem 2.2rem 2.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: all 0.2s ease;
-    }
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 2.8rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25), 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+            padding: 2.2rem 2.2rem 2.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+        }
 
-    .card:hover {
-      box-shadow: 0 28px 48px -16px rgba(0, 30, 60, 0.3);
-    }
+        .card:hover {
+            box-shadow: 0 28px 48px -16px rgba(0, 30, 60, 0.3);
+        }
 
-    /* ----- introduction section ----- */
-    .intro-section {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1.2rem;
-      border-bottom: 2px dashed #d0dbe8;
-    }
+        /* ----- introduction section (shared) ----- */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px dashed #d0dbe8;
+        }
 
-    .avatar {
-      width: 80px;
-      height: 80px;
-      background: #1e293b;
-      border-radius: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.6rem;
-      box-shadow: 0 8px 16px -6px rgba(0,0,0,0.15);
-      border: 3px solid white;
-    }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: #1e293b;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.6rem;
+            box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.15);
+            border: 3px solid white;
+        }
 
-    .avatar i {
-      font-size: 2.8rem;
-      color: #b9d0e8;
-    }
+        .avatar i {
+            font-size: 2.8rem;
+            color: #b9d0e8;
+        }
 
-    .intro-section h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #0b1a2e;
-    }
+        .intro-section h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0b1a2e;
+        }
 
-    .intro-section .tagline {
-      color: #2d4059;
-      font-size: 0.95rem;
-      font-weight: 450;
-      background: rgba(255,255,255,0.5);
-      display: inline-block;
-      padding: 0.2rem 1.4rem;
-      border-radius: 60px;
-      margin-top: 0.2rem;
-      backdrop-filter: blur(2px);
-      border: 1px solid #d3dce8;
-    }
+        .intro-section .tagline {
+            color: #2d4059;
+            font-size: 0.95rem;
+            font-weight: 450;
+            background: rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            padding: 0.2rem 1.4rem;
+            border-radius: 60px;
+            margin-top: 0.2rem;
+            backdrop-filter: blur(2px);
+            border: 1px solid #d3dce8;
+        }
 
-    .intro-section .tagline i {
-      margin-right: 6px;
-      color: #1e293b;
-    }
+        .intro-section .tagline i {
+            margin-right: 6px;
+            color: #1e293b;
+        }
 
-    .intro-section p {
-      margin-top: 0.6rem;
-      color: #2e405b;
-      font-size: 0.92rem;
-      line-height: 1.5;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .intro-section p {
+            margin-top: 0.6rem;
+            color: #2e405b;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .social-mini {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-top: 0.8rem;
-      font-size: 0.85rem;
-      color: #1e2f45;
-    }
+        .social-mini {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #1e2f45;
+        }
 
-    .social-mini a {
-      color: #1e293b;
-      text-decoration: none;
-      font-weight: 500;
-      background: #e4ebf3;
-      padding: 0.2rem 1rem;
-      border-radius: 40px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      border: 1px solid #cbd5e1;
-      transition: 0.15s;
-    }
+        .social-mini a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            background: #e4ebf3;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid #cbd5e1;
+            transition: 0.15s;
+        }
 
-    .social-mini a:hover {
-      background: #d0dae7;
-      transform: scale(0.96);
-    }
+        .social-mini a:hover {
+            background: #d0dae7;
+            transform: scale(0.96);
+        }
 
-    /* ----- form (contact / notify) ----- */
-    .form-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.4rem;
-    }
+        /* ----- link input section (for introduction) ----- */
+        .link-section {
+            background: #e8eff7;
+            border-radius: 2rem;
+            padding: 1.2rem 1.5rem 1.5rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #d0dbe8;
+        }
 
-    .form-header i {
-      font-size: 1.6rem;
-      color: #1e293b;
-      background: #d9e2ef;
-      padding: 0.5rem 0.7rem;
-      border-radius: 1.2rem;
-    }
+        .link-section label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #334155;
+            margin-bottom: 0.3rem;
+        }
 
-    .form-header h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #0b1a2e;
-    }
+        .link-input-wrapper {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    .form-header span {
-      background: #1e293b;
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 500;
-      padding: 0.15rem 0.7rem;
-      border-radius: 40px;
-      margin-left: 0.2rem;
-    }
+        .link-input-wrapper input {
+            flex: 1;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.15s;
+            min-width: 160px;
+        }
 
-    .input-group {
-      margin-bottom: 1.2rem;
-    }
+        .link-input-wrapper input:focus {
+            border-color: #1e293b;
+            box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08);
+        }
 
-    .input-group label {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: #334155;
-      margin-bottom: 0.25rem;
-    }
+        .link-input-wrapper button {
+            background: #0b1a2e;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #2c3d57;
+            white-space: nowrap;
+        }
 
-    .input-field {
-      width: 100%;
-      background: white;
-      border: 1px solid #dbe0e8;
-      border-radius: 60px;
-      padding: 0.65rem 1.2rem;
-      font-size: 0.9rem;
-      color: #0b1a2e;
-      transition: all 0.15s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .link-input-wrapper button:hover {
+            background: #1f3147;
+            transform: scale(0.97);
+        }
 
-    .input-field i {
-      color: #6b7a8f;
-      font-size: 0.9rem;
-      width: 1.2rem;
-      text-align: center;
-    }
+        .link-input-wrapper button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
-    .input-field input,
-    .input-field textarea {
-      border: none;
-      outline: none;
-      background: transparent;
-      width: 100%;
-      font-size: 0.9rem;
-      color: #0b1a2e;
-      resize: vertical;
-      font-family: inherit;
-    }
+        /* ----- form (contact / notify) ----- */
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.4rem;
+        }
 
-    .input-field textarea {
-      min-height: 60px;
-      padding: 0.2rem 0;
-      line-height: 1.4;
-    }
+        .form-header i {
+            font-size: 1.6rem;
+            color: #1e293b;
+            background: #d9e2ef;
+            padding: 0.5rem 0.7rem;
+            border-radius: 1.2rem;
+        }
 
-    .input-field:focus-within {
-      border-color: #1e293b;
-      box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08);
-      background: #ffffff;
-    }
+        .form-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0b1a2e;
+        }
 
-    .input-field .prefix {
-      color: #5f6f84;
-      font-weight: 450;
-      font-size: 0.85rem;
-    }
+        .form-header span {
+            background: #1e293b;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 500;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+            margin-left: 0.2rem;
+        }
 
-    .row-duo {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
 
-    .row-duo .input-group {
-      flex: 1 1 0;
-      min-width: 130px;
-    }
+        .input-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #334155;
+            margin-bottom: 0.25rem;
+        }
 
-    .msg-field .input-field {
-      border-radius: 28px;
-      align-items: flex-start;
-      padding-top: 0.8rem;
-    }
+        .input-field {
+            width: 100%;
+            background: white;
+            border: 1px solid #dbe0e8;
+            border-radius: 60px;
+            padding: 0.65rem 1.2rem;
+            font-size: 0.9rem;
+            color: #0b1a2e;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .msg-field .input-field i {
-      margin-top: 0.1rem;
-    }
+        .input-field i {
+            color: #6b7a8f;
+            font-size: 0.9rem;
+            width: 1.2rem;
+            text-align: center;
+        }
 
-    /* notify row */
-    .notify-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #eef3f9;
-      padding: 0.35rem 1.2rem 0.35rem 1.6rem;
-      border-radius: 100px;
-      margin: 1.4rem 0 1.2rem;
-      border: 1px solid #d3dce8;
-    }
+        .input-field input,
+        .input-field textarea {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            font-size: 0.9rem;
+            color: #0b1a2e;
+            resize: vertical;
+            font-family: inherit;
+        }
 
-    .notify-row .badge {
-      background: #1e293b;
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 500;
-      padding: 0.15rem 0.9rem;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: 0.15s;
-      border: 1px solid #3a4c66;
-      letter-spacing: 0.2px;
-    }
+        .input-field textarea {
+            min-height: 60px;
+            padding: 0.2rem 0;
+            line-height: 1.4;
+        }
 
-    .notify-row .badge:hover {
-      background: #2c405a;
-      transform: scale(0.96);
-    }
+        .input-field:focus-within {
+            border-color: #1e293b;
+            box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08);
+            background: #ffffff;
+        }
 
-    .notify-row .live-dot {
-      display: inline-block;
-      width: 9px;
-      height: 9px;
-      background: #22c55e;
-      border-radius: 50%;
-      margin-right: 5px;
-      animation: pulse-dot 1.8s infinite;
-    }
+        .input-field .prefix {
+            color: #5f6f84;
+            font-weight: 450;
+            font-size: 0.85rem;
+        }
 
-    @keyframes pulse-dot {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+        .row-duo {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
 
-    .notify-row .live-label {
-      font-weight: 500;
-      color: #0f2a40;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-    }
+        .row-duo .input-group {
+            flex: 1 1 0;
+            min-width: 130px;
+        }
 
-    .btn-submit {
-      background: #0b1a2e;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.8rem 1.8rem;
-      border-radius: 60px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      transition: 0.2s;
-      cursor: pointer;
-      box-shadow: 0 6px 14px rgba(11, 26, 46, 0.2);
-      border: 1px solid #2c3d57;
-    }
+        .msg-field .input-field {
+            border-radius: 28px;
+            align-items: flex-start;
+            padding-top: 0.8rem;
+        }
 
-    .btn-submit:hover {
-      background: #1f3147;
-      transform: scale(0.98);
-    }
+        .msg-field .input-field i {
+            margin-top: 0.1rem;
+        }
 
-    .btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: scale(0.98);
-    }
+        /* notify row */
+        .notify-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef3f9;
+            padding: 0.35rem 1.2rem 0.35rem 1.6rem;
+            border-radius: 100px;
+            margin: 1.4rem 0 1.2rem;
+            border: 1px solid #d3dce8;
+        }
 
-    /* toast */
-    .toast-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      max-width: 360px;
-      width: 100%;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+        .notify-row .badge {
+            background: #1e293b;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 500;
+            padding: 0.15rem 0.9rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.15s;
+            border: 1px solid #3a4c66;
+            letter-spacing: 0.2px;
+        }
 
-    .toast {
-      background: #0b1a2e;
-      color: #f0f5fe;
-      padding: 0.8rem 1.4rem;
-      border-radius: 60px;
-      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.3);
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      backdrop-filter: blur(4px);
-      border-left: 4px solid #22c55e;
-      animation: slideUp 0.35s ease;
-    }
+        .notify-row .badge:hover {
+            background: #2c405a;
+            transform: scale(0.96);
+        }
 
-    .toast.error {
-      border-left-color: #ef4444;
-    }
+        .notify-row .live-dot {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse-dot 1.8s infinite;
+        }
 
-    .toast.hide {
-      animation: slideDown 0.25s ease forwards;
-    }
+        @keyframes pulse-dot {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideDown {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(30px); }
-    }
+        .notify-row .live-label {
+            font-weight: 500;
+            color: #0f2a40;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
 
-    .bot-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      background: #e4ebf3;
-      padding: 0.2rem 1.2rem;
-      border-radius: 60px;
-      color: #1e2c3e;
-      margin-top: 0.2rem;
-      justify-content: center;
-      border: 1px solid #cdd8e6;
-    }
+        .btn-submit {
+            background: #0b1a2e;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: 0.2s;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(11, 26, 46, 0.2);
+            border: 1px solid #2c3d57;
+        }
 
-    .bot-status .bot-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: #22c55e;
-      border-radius: 50%;
-    }
+        .btn-submit:hover {
+            background: #1f3147;
+            transform: scale(0.98);
+        }
 
-    .footnote {
-      margin-top: 1.2rem;
-      font-size: 0.65rem;
-      text-align: center;
-      color: #6d7d92;
-      border-top: 1px solid #d9e2ef;
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: scale(0.98);
+        }
 
-    .footnote a {
-      color: #1e293b;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px dotted #b0c4db;
-    }
+        /* toast */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            max-width: 360px;
+            width: 100%;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    @media (max-width: 480px) {
-      .card { padding: 1.5rem; }
-      .row-duo { flex-direction: column; gap: 0.1rem; }
-      .intro-section h1 { font-size: 1.6rem; }
-    }
-  </style>
+        .toast {
+            background: #0b1a2e;
+            color: #f0f5fe;
+            padding: 0.8rem 1.4rem;
+            border-radius: 60px;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            backdrop-filter: blur(4px);
+            border-left: 4px solid #22c55e;
+            animation: slideUp 0.35s ease;
+        }
+
+        .toast.error {
+            border-left-color: #ef4444;
+        }
+
+        .toast.hide {
+            animation: slideDown 0.25s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .bot-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            background: #e4ebf3;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            color: #1e2c3e;
+            margin-top: 0.2rem;
+            justify-content: center;
+            border: 1px solid #cdd8e6;
+        }
+
+        .bot-status .bot-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .footnote {
+            margin-top: 1.2rem;
+            font-size: 0.65rem;
+            text-align: center;
+            color: #6d7d92;
+            border-top: 1px solid #d9e2ef;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footnote a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b0c4db;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .row-duo {
+                flex-direction: column;
+                gap: 0.1rem;
+            }
+            .intro-section h1 {
+                font-size: 1.6rem;
+            }
+            .link-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .link-input-wrapper button {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="card">
-  <!-- ===== INTRODUCTION ===== -->
-  <div class="intro-section">
-    <div class="avatar">
-      <i class="fas fa-user-astronaut"></i>
-    </div>
-    <h1>Sofior <span style="font-weight: 300; color: #3d5778;">/ li</span></h1>
-    <div class="tagline">
-      <i class="fas fa-code"></i> full-stack · ui/ux
-    </div>
-    <p>
-      <i class="fas fa-quote-left" style="opacity: 0.5; margin-right: 4px;"></i>
-      building digital experiences, one line at a time.
-      <i class="fas fa-quote-right" style="opacity: 0.5; margin-left: 4px;"></i>
-    </p>
-    <div class="social-mini">
-      <a href="#"><i class="fab fa-github"></i> Sofior12</a>
-      <a href="#"><i class="fab fa-twitter"></i> @sofior</a>
-      <a href="#"><i class="fab fa-linkedin-in"></i> sofior</a>
-    </div>
-  </div>
-
-  <!-- ===== CONTACT / NOTIFY FORM ===== -->
-  <div class="form-header">
-    <i class="fas fa-paper-plane"></i>
-    <h2>get in touch <span>bot</span></h2>
-  </div>
-
-  <form id="contactForm">
-    <!-- age -->
-    <div class="input-group">
-      <label><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> Age</label>
-      <div class="input-field">
-        <i class="fas fa-user"></i>
-        <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24" />
-      </div>
-    </div>
-
-    <!-- telegram + instagram -->
-    <div class="row-duo">
-      <div class="input-group">
-        <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
-        <div class="input-field">
-          <span class="prefix">@</span>
-          <input type="text" id="telegramInput" placeholder="username" value="sofior_dev" />
+    <div class="card">
+        <!-- ===== INTRODUCTION (static, for the page owner) ===== -->
+        <div class="intro-section">
+            <div class="avatar">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <h1>Sofior <span style="font-weight: 300; color: #3d5778;">/ li</span></h1>
+            <div class="tagline">
+                <i class="fas fa-code"></i> full-stack · ui/ux
+            </div>
+            <p>
+                <i class="fas fa-quote-left" style="opacity: 0.5; margin-right: 4px;"></i>
+                building digital experiences, one line at a time.
+                <i class="fas fa-quote-right" style="opacity: 0.5; margin-left: 4px;"></i>
+            </p>
+            <div class="social-mini">
+                <a href="#"><i class="fab fa-github"></i> Sofior12</a>
+                <a href="#"><i class="fab fa-twitter"></i> @sofior</a>
+                <a href="#"><i class="fab fa-linkedin-in"></i> sofior</a>
+            </div>
         </div>
-      </div>
-      <div class="input-group">
-        <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
-        <div class="input-field">
-          <span class="prefix">@</span>
-          <input type="text" id="instagramInput" placeholder="username" value="sofior.ux" />
+
+        <!-- ===== LINK INPUT: "dusra admi introduction dega" ===== -->
+        <div class="link-section">
+            <label><i class="fas fa-link" style="margin-right: 6px;"></i> share your introduction link</label>
+            <div class="link-input-wrapper">
+                <input type="url" id="linkInput" placeholder="https://your-intro-page.com" value="https://sofior.dev/intro" />
+                <button id="shareLinkBtn"><i class="fas fa-share-alt"></i> share</button>
+            </div>
+            <div style="font-size: 0.7rem; color: #475569; margin-top: 0.5rem; text-align: center;">
+                <i class="fas fa-info-circle"></i> paste your intro link — it will be sent via Telegram bot
+            </div>
         </div>
-      </div>
+
+        <!-- ===== CONTACT / NOTIFY FORM ===== -->
+        <div class="form-header">
+            <i class="fas fa-paper-plane"></i>
+            <h2>get in touch <span>bot</span></h2>
+        </div>
+
+        <form id="contactForm">
+            <!-- age -->
+            <div class="input-group">
+                <label><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> Age</label>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="number" id="ageInput" placeholder="Enter your age" min="1" max="120" value="24" />
+                </div>
+            </div>
+
+            <!-- telegram + instagram -->
+            <div class="row-duo">
+                <div class="input-group">
+                    <label><i class="fab fa-telegram-plane" style="margin-right: 4px;"></i> Telegram</label>
+                    <div class="input-field">
+                        <span class="prefix">@</span>
+                        <input type="text" id="telegramInput" placeholder="username" value="sofior_dev" />
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label><i class="fab fa-instagram" style="margin-right: 4px;"></i> Instagram</label>
+                    <div class="input-field">
+                        <span class="prefix">@</span>
+                        <input type="text" id="instagramInput" placeholder="username" value="sofior.ux" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- message -->
+            <div class="input-group msg-field">
+                <label><i class="far fa-comment-dots"></i> Message</label>
+                <div class="input-field">
+                    <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.2rem;"></i>
+                    <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, here's my intro link! 👋</textarea>
+                </div>
+            </div>
+
+            <!-- notify row -->
+            <div class="notify-row">
+                <div class="live-label">
+                    <span class="live-dot"></span> live
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-robot" style="color: #1e293b;"></i>
+                    <span class="badge" id="notifyBadge"><i class="fas fa-paper-plane" style="margin-right: 4px;"></i> bot API</span>
+                </div>
+            </div>
+
+            <!-- bot status -->
+            <div class="bot-status">
+                <span class="bot-dot"></span> <i class="fas fa-check-circle" style="color: #1e7b3c;"></i> Telegram Bot · ready
+            </div>
+
+            <!-- submit -->
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> send to bot
+            </button>
+
+            <div class="footnote">
+                <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
+                <span><i class="fas fa-issue"></i> issues · PR</span>
+                <span><i class="fas fa-file-alt"></i> README</span>
+            </div>
+        </form>
     </div>
 
-    <!-- message -->
-    <div class="input-group msg-field">
-      <label><i class="far fa-comment-dots"></i> Message</label>
-      <div class="input-field">
-        <i class="far fa-envelope" style="align-self: flex-start; margin-top: 0.2rem;"></i>
-        <textarea id="messageInput" placeholder="Write your message..." rows="2">hey, love the intro + bot combo! 🚀</textarea>
-      </div>
-    </div>
+    <!-- toast container -->
+    <div id="toastContainer" class="toast-container"></div>
 
-    <!-- notify row -->
-    <div class="notify-row">
-      <div class="live-label">
-        <span class="live-dot"></span> live
-      </div>
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <i class="fas fa-robot" style="color: #1e293b;"></i>
-        <span class="badge" id="notifyBadge"><i class="fas fa-paper-plane" style="margin-right: 4px;"></i> bot API</span>
-      </div>
-    </div>
+    <script>
+        (function() {
+            "use strict";
 
-    <!-- bot status -->
-    <div class="bot-status">
-      <span class="bot-dot"></span> <i class="fas fa-check-circle" style="color: #1e7b3c;"></i> Telegram Bot · ready
-    </div>
+            // ⚠️ REPLACE WITH YOUR BOT TOKEN AND CHAT ID
+            const BOT_TOKEN = '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // 👈 your token
+            const CHAT_ID = '123456789'; // 👈 your chat id
 
-    <!-- submit -->
-    <button type="submit" class="btn-submit" id="submitBtn">
-      <i class="fas fa-paper-plane"></i> send to bot
-    </button>
+            const form = document.getElementById('contactForm');
+            const ageInput = document.getElementById('ageInput');
+            const telegramInput = document.getElementById('telegramInput');
+            const instagramInput = document.getElementById('instagramInput');
+            const messageInput = document.getElementById('messageInput');
+            const linkInput = document.getElementById('linkInput');
+            const shareBtn = document.getElementById('shareLinkBtn');
+            const toastContainer = document.getElementById('toastContainer');
+            const submitBtn = document.getElementById('submitBtn');
 
-    <div class="footnote">
-      <span><i class="fas fa-code-branch"></i> github.com/Sofior12/li</span>
-      <span><i class="fas fa-issue"></i> issues · PR</span>
-      <span><i class="fas fa-file-alt"></i> README</span>
-    </div>
-  </form>
-</div>
-
-<!-- toast container -->
-<div id="toastContainer" class="toast-container"></div>
-
-<script>
-  (function() {
-    "use strict";
-
-    // ⚠️ REPLACE WITH YOUR BOT TOKEN AND CHAT ID
-    const BOT_TOKEN = '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // 👈 your token
-    const CHAT_ID = '123456789'; // 👈 your chat id
-
-    const form = document.getElementById('contactForm');
-    const ageInput = document.getElementById('ageInput');
-    const telegramInput = document.getElementById('telegramInput');
-    const instagramInput = document.getElementById('instagramInput');
-    const messageInput = document.getElementById('messageInput');
-    const toastContainer = document.getElementById('toastContainer');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // ----- toast -----
-    function showToast(message, icon = 'fa-check-circle', isError = false) {
-      const toast = document.createElement('div');
-      toast.className = 'toast' + (isError ? ' error' : '');
-      toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
-      toastContainer.appendChild(toast);
-
-      setTimeout(() => {
-        toast.classList.add('hide');
-        setTimeout(() => { if (toast.parentNode) toast.remove(); }, 300);
-      }, 5000);
-    }
-
-    // ----- send to telegram bot -----
-    async function sendToTelegramBot(text) {
-      // demo mode if token not set
-      if (!BOT_TOKEN || BOT_TOKEN === '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx') {
-        console.warn('⚠️ Bot token not configured. Demo mode.');
-        showToast('🔔 [DEMO] ' + text.substring(0, 50) + '…', 'fa-bell');
-        return true;
-      }
-
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      const payload = {
-        chat_id: CHAT_ID,
-        text: text,
-        parse_mode: 'HTML',
-        disable_web_page_preview: true,
-      };
-
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const data = await response.json();
-
-        if (data.ok) {
-          showToast('✅ Telegram bot notification sent!', 'fa-check-circle');
-          return true;
-        } else {
-          console.error('Telegram API error:', data);
-          showToast('❌ Bot error: ' + (data.description || 'unknown'), 'fa-exclamation-triangle', true);
-          return false;
-        }
-      } catch (err) {
-        console.error('Network error:', err);
-        showToast('⚠️ Network error. Check console.', 'fa-exclamation-triangle', true);
-        return false;
-      }
-    }
-
-    // ----- build message -----
-    function buildBotMessage() {
-      const age = ageInput.value.trim() || 'not provided';
-      const telegram = telegramInput.value.trim() || 'username';
-      const instagram = instagramInput.value.trim() || 'username';
-      const message = messageInput.value.trim() || '(empty message)';
-
-      const escape = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-      return `<b>📬 New contact (from intro page)</b>\n` +
-             `👤 Age: ${escape(age)}\n` +
-             `📱 Telegram: @${escape(telegram)}\n` +
-             `📸 Instagram: @${escape(instagram)}\n` +
-             `💬 Message:\n${escape(message)}`;
-    }
-
-    // ----- submit handler -----
-    async function handleSubmit(e) {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> sending...`;
-
-      const text = buildBotMessage();
-      showToast('📤 Sending to Telegram bot …', 'fa-paper-plane');
-
-      await sendToTelegramBot(text);
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> send to bot`;
-    }
-
-    form.addEventListener('submit', handleSubmit);
-
-    // ----- badge click: test ping -----
-    const badge = document.getElementById('notifyBadge');
-    if (badge) {
-      badge.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const pingMsg = `🔔 <b>Ping from intro page</b>\n@${telegramInput.value || 'user'} clicked the bot badge.`;
-        sendToTelegramBot(pingMsg);
-        showToast('🔔 test ping sent to bot', 'fa-bolt');
-      });
-    }
-
-    // welcome toast
-    window.addEventListener('load', function() {
-      setTimeout(() => {
-        showToast('🟢 Bot API · ready', 'fa-circle');
-      }, 700);
-    });
-
-  })();
-</script>
-</body>
-</html>
+            // ----- toast -----
+            function showToast(message
