@@ -1,8 +1,7 @@
-// api/index.js - Telegram Bot API Webhook
-// github.com/Sofior12/li/api
+// api/send.js - Vercel Serverless Function
+// Token is stored in Vercel Environment Variables, NOT in code!
 
 export default async function handler(req, res) {
-    // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -11,41 +10,37 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
-    // Configuration
-    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '7700000000:AAE-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-    const CHAT_ID = process.env.TELEGRAM_CHAT_ID || '123456789';
+    // 🔒 Read from Environment Variables (set in Vercel Dashboard)
+    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-    // Handle GET request (health check)
-    if (req.method === 'GET') {
-        return res.status(200).json({
-            status: 'ok',
-            message: 'Telegram Bot API Webhook is running',
-            repo: 'github.com/Sofior12/li',
-            endpoints: {
-                'POST /api/send': 'Send message to Telegram',
-                'GET /api': 'Health check'
-            }
+    // ❌ If tokens are missing, return error (won't expose in code)
+    if (!BOT_TOKEN || !CHAT_ID) {
+        return res.status(500).json({
+            ok: false,
+            error: 'Bot configuration missing. Please set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in Vercel Environment Variables.'
         });
     }
 
-    // Handle POST request (send notification)
+    if (req.method === 'GET') {
+        return res.status(200).json({
+            status: 'ok',
+            message: 'Secure API is running',
+            secure: true
+        });
+    }
+
     if (req.method === 'POST') {
         try {
-            const { message, parse_mode = 'HTML', chat_id } = req.body;
+            const { message, parse_mode = 'HTML' } = req.body;
 
             if (!message) {
-                return res.status(400).json({
-                    ok: false,
-                    error: 'Message is required'
-                });
+                return res.status(400).json({ ok: false, error: 'Message is required' });
             }
 
-            const targetChatId = chat_id || CHAT_ID;
-
-            // Send to Telegram
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             const payload = {
-                chat_id: targetChatId,
+                chat_id: CHAT_ID,
                 text: message,
                 parse_mode: parse_mode,
                 disable_web_page_preview: true,
@@ -60,32 +55,14 @@ export default async function handler(req, res) {
             const data = await response.json();
 
             if (data.ok) {
-                return res.status(200).json({
-                    ok: true,
-                    result: data.result,
-                    repo: 'github.com/Sofior12/li'
-                });
+                return res.status(200).json({ ok: true, result: data.result });
             } else {
-                return res.status(400).json({
-                    ok: false,
-                    error: data.description || 'Telegram API error',
-                    repo: 'github.com/Sofior12/li'
-                });
+                return res.status(400).json({ ok: false, error: data.description });
             }
-
         } catch (error) {
-            return res.status(500).json({
-                ok: false,
-                error: error.message,
-                repo: 'github.com/Sofior12/li'
-            });
+            return res.status(500).json({ ok: false, error: error.message });
         }
     }
 
-    // Method not allowed
-    return res.status(405).json({
-        ok: false,
-        error: 'Method not allowed',
-        repo: 'github.com/Sofior12/li'
-    });
+    return res.status(405).json({ ok: false, error: 'Method not allowed' });
 }
