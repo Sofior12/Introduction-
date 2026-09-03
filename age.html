@@ -3,137 +3,80 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Colorful · Age</title>
+    <title>🐍 Age · Step 2</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="colorful-bg">
-        <div class="rainbow-mesh"></div>
-        <div class="color-wave"></div>
-        <div class="color-orb c1"></div>
-        <div class="color-orb c2"></div>
-        <div class="color-orb c3"></div>
-        <div class="color-orb c4"></div>
-        <div class="color-orb c5"></div>
-        <div class="color-orb c6"></div>
-        <div class="color-orb c7"></div>
-        <div class="color-orb c8"></div>
-        <div class="particles"></div>
+    <div class="bg-glow">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
     </div>
 
-    <div class="apple-container">
-        <div class="apple-card colorful-card">
+    <div class="container">
+        <div class="card">
 
-            <div class="apple-status">
-                <div class="apple-status-left">
-                    <span class="apple-dot rainbow"></span>
-                    <span class="apple-status-text" style="color:rgba(255,255,255,0.6);">Live</span>
-                    <span class="apple-divider" style="color:rgba(255,255,255,0.1);">|</span>
-                    <span class="apple-status-step" style="color:rgba(255,255,255,0.4);">Step 2/5</span>
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Secret<span>Message</span></span>
                 </div>
-                <div class="apple-status-right">
-                    <span class="apple-badge glass">✨ Secure</span>
-                    <span class="apple-badge glass purple">🔥 2026</span>
+                <div class="step-badge">2 / 5</div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width:40%"></div>
+                </div>
+                <div class="steps">
+                    <span class="done">Name</span>
+                    <span class="active">Age</span>
+                    <span>City</span>
+                    <span>IG</span>
+                    <span>Message</span>
                 </div>
             </div>
 
-            <div class="apple-header">
-                <div class="apple-logo">
-                    <div class="apple-icon gradient-icon">
-                        <i class="fas fa-comment-dots"></i>
-                    </div>
-                    <div>
-                        <span class="apple-title" style="color:#fff;">Secret<span style="background:linear-gradient(135deg,#f472b6,#8b5cf6,#06b6d4,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Message</span></span>
-                        <span class="apple-sub" style="color:rgba(255,255,255,0.3);">anonymous · encrypted</span>
+            <div class="content">
+                <div class="icon"><i class="fas fa-cake-candles"></i></div>
+                <h1>How old are <span>you</span>?</h1>
+                <p>🎉 Just for fun · be honest</p>
+
+                <div class="input-wrap">
+                    <div class="input">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="number" id="ageInput" placeholder="Enter your age..." min="1" max="120" />
                     </div>
                 </div>
-                <div class="apple-step-ring">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2.5"/>
-                        <circle cx="20" cy="20" r="16" fill="none" stroke="url(#rainbowGrad)" stroke-width="2.5" stroke-dasharray="100" stroke-dashoffset="60"/>
-                        <defs>
-                            <linearGradient id="rainbowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#f472b6"/>
-                                <stop offset="33%" stop-color="#8b5cf6"/>
-                                <stop offset="66%" stop-color="#06b6d4"/>
-                                <stop offset="100%" stop-color="#f59e0b"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <span class="apple-step-num" style="color:#fff;">2</span>
+
+                <div class="btn-group">
+                    <a href="index.html" class="btn secondary"><i class="fas fa-arrow-left"></i> Back</a>
+                    <button class="btn primary" onclick="nextPage()">Continue <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
-            <div class="apple-progress">
-                <div class="apple-progress-track" style="background:rgba(255,255,255,0.06);">
-                    <div class="apple-progress-fill rainbow-fill" style="width:40%"></div>
-                </div>
-                <div class="apple-dots">
-                    <span class="apple-dot-item done" style="color:rgba(255,255,255,0.3);">Name</span>
-                    <span class="apple-dot-item active" style="color:#f472b6;">Age</span>
-                    <span class="apple-dot-item" style="color:rgba(255,255,255,0.2);">City</span>
-                    <span class="apple-dot-item" style="color:rgba(255,255,255,0.2);">IG</span>
-                    <span class="apple-dot-item" style="color:rgba(255,255,255,0.2);">Message</span>
-                </div>
+            <div class="footer">
+                <span><i class="fas fa-shield-alt"></i> 256-bit</span>
+                <span><i class="fas fa-bolt"></i> 0.2ms</span>
+                <span><i class="fas fa-lock"></i> Encrypted</span>
             </div>
 
-            <form id="ageForm">
-                <div class="apple-step">
-                    <div class="apple-step-icon" style="background:linear-gradient(135deg,#f472b6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
-                        <i class="fas fa-cake-candles"></i>
-                    </div>
-                    <h2 class="apple-title-lg" style="color:#fff;">How old are <span style="background:linear-gradient(135deg,#f472b6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">you</span>?</h2>
-                    <p class="apple-desc" style="color:rgba(255,255,255,0.3);">🎉 Just for fun · be honest</p>
-                    <div class="apple-input-wrap">
-                        <div class="apple-input glass-input">
-                            <i class="fas fa-calendar-alt" style="color:rgba(255,255,255,0.2);"></i>
-                            <input type="number" id="ageInput" placeholder="Enter your age..." style="color:#fff;" />
-                        </div>
-                    </div>
-                    <div class="apple-btn-group">
-                        <a href="index.html" class="apple-btn glass-btn">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </a>
-                        <button type="submit" class="apple-btn colorful-primary">
-                            Continue <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <div class="apple-footer" style="border-top-color:rgba(255,255,255,0.04);">
-                <div class="apple-footer-left">
-                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-shield-alt" style="color:rgba(139,92,246,0.3);"></i> 256-bit</span>
-                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-bolt" style="color:rgba(251,146,60,0.3);"></i> 0.2ms</span>
-                    <span style="color:rgba(255,255,255,0.15);"><i class="fas fa-lock" style="color:rgba(6,182,212,0.3);"></i> Encrypted</span>
-                </div>
-                <div class="apple-footer-right">
-                    <span class="apple-vercel" style="color:rgba(255,255,255,0.1);">
-                        <i class="fas fa-check-circle" style="color:#34c759;"></i> v2.0.0
-                    </span>
-                </div>
-            </div>
         </div>
-
-        <div class="apple-domain" style="color:rgba(255,255,255,0.05);">
-            <i class="fas fa-globe"></i>
-            <span>secret-message.vercel.app</span>
-            <span class="apple-dot-domain">•</span>
-            <span class="apple-source">main · 2026</span>
-        </div>
+        <div class="domain">secret-message.vercel.app · 2026</div>
     </div>
-
-    <div id="toastContainer" class="apple-toast-container"></div>
 
     <script>
-        document.getElementById('ageForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function nextPage() {
             const age = document.getElementById('ageInput').value.trim();
             sessionStorage.setItem('userAge', age || 'Not specified');
             window.location.href = 'city.html';
+        }
+
+        document.getElementById('ageInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') nextPage();
         });
     </script>
 </body>
