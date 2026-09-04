@@ -1,83 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐍 Instagram · Step 4</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Style</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="bg-glow">
-        <div class="orb o1"></div>
-        <div class="orb o2"></div>
-        <div class="orb o3"></div>
-    </div>
-
     <div class="container">
-        <div class="card">
-
-            <div class="header">
-                <div class="logo">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Secret<span>Message</span></span>
-                </div>
-                <div class="step-badge">4 / 5</div>
-            </div>
-
-            <div class="progress">
-                <div class="progress-track">
-                    <div class="progress-fill" style="width:80%"></div>
-                </div>
-                <div class="steps">
-                    <span class="done">Name</span>
-                    <span class="done">Age</span>
-                    <span class="done">City</span>
-                    <span class="active">IG</span>
-                    <span>Message</span>
+        <div class="instagram-card">
+            <div class="profile">
+                <div class="avatar">✨</div>
+                <div class="username">
+                    secret_messages <span>• 2h</span>
                 </div>
             </div>
 
-            <div class="content">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <h1>Your <span>Instagram</span> ID?</h1>
-                <p>📸 So I can connect with you</p>
-
-                <div class="input-wrap">
-                    <div class="input">
-                        <i class="fab fa-instagram"></i>
-                        <input type="text" id="instagramInput" placeholder="@username" />
-                    </div>
+            <div class="story-highlight">
+                <div class="story-ring" data-msg="💖 You are loved!">
+                    <div class="inner">❤️</div>
                 </div>
-
-                <div class="btn-group">
-                    <a href="city.html" class="btn secondary"><i class="fas fa-arrow-left"></i> Back</a>
-                    <button class="btn primary" onclick="nextPage()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="story-ring" data-msg="🌟 Keep shining!">
+                    <div class="inner">⭐</div>
+                </div>
+                <div class="story-ring" data-msg="🌈 Stay colorful!">
+                    <div class="inner">🌈</div>
+                </div>
+                <div class="story-ring" data-msg="🔥 You're on fire!">
+                    <div class="inner">🔥</div>
+                </div>
+                <div class="story-ring" data-msg="💪 You got this!">
+                    <div class="inner">💪</div>
                 </div>
             </div>
 
-            <div class="footer">
-                <span><i class="fas fa-shield-alt"></i> 256-bit</span>
-                <span><i class="fas fa-bolt"></i> 0.2ms</span>
-                <span><i class="fas fa-lock"></i> Encrypted</span>
+            <div class="message-box">
+                <div class="msg" id="instaMessage">👆 Tap a story ring above</div>
             </div>
 
+            <div style="margin-top:18px;text-align:center;color:#a8a6d6;font-size:0.85rem;">
+                <span>❤️ 1,234</span> · <span>💬 89</span> · <span>📤 45</span>
+            </div>
+
+            <a href="index.html" class="back-link" style="display:block;text-align:center;margin-top:18px;">← Back to Home</a>
         </div>
-        <div class="domain">secret-message.vercel.app · 2026</div>
     </div>
-
-    <script>
-        function nextPage() {
-            const instagram = document.getElementById('instagramInput').value.trim();
-            sessionStorage.setItem('userInstagram', instagram || 'Not specified');
-            window.location.href = 'message.html';
-        }
-
-        document.getElementById('instagramInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') nextPage();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
