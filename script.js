@@ -1,177 +1,183 @@
-(function() {
-    "use strict";
+// ===== DOM Ready =====
+document.addEventListener('DOMContentLoaded', function() {
 
-    let currentStep = 1;
-    const totalSteps = 4;
-
-    const form = document.getElementById('messageForm');
-    const nameInput = document.getElementById('nameInput');
-    const ageInput = document.getElementById('ageInput');
-    const cityInput = document.getElementById('cityInput');
-    const messageInput = document.getElementById('messageInput');
-    const submitBtn = document.getElementById('submitBtn');
-    const stepDisplay = document.getElementById('stepDisplay');
-    const progressBar = document.getElementById('progressBar');
-    const toastContainer = document.getElementById('toastContainer');
-
-    // ===== SHOW STEP =====
-    function showStep(step) {
-        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-        document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
-
-        document.querySelectorAll('.step-dot').forEach(el => {
-            const s = parseInt(el.dataset.step);
-            el.classList.remove('active', 'done');
-            if (s === step) el.classList.add('active');
-            else if (s < step) el.classList.add('done');
-        });
-
-        stepDisplay.textContent = step;
-        progressBar.style.width = ((step / totalSteps) * 100) + '%';
-        currentStep = step;
-
-        const firstInput = document.querySelector(`.step[data-step="${step}"] input, .step[data-step="${step}"] textarea`);
-        if (firstInput) {
-            setTimeout(() => firstInput.focus(), 300);
-        }
-    }
-
-    // ===== NEXT STEP =====
-    window.nextStep = function() {
-        if (currentStep === 1 && !nameInput.value.trim()) {
-            showToast('⚠️ Please enter your name.', 'fa-exclamation-triangle', true);
-            nameInput.focus();
-            nameInput.parentElement.style.borderColor = '#ef4444';
-            setTimeout(() => nameInput.parentElement.style.borderColor = '', 2000);
-            return;
-        }
-        if (currentStep === 4 && !messageInput.value.trim()) {
-            showToast('⚠️ Please write a message.', 'fa-exclamation-triangle', true);
-            messageInput.focus();
-            messageInput.parentElement.style.borderColor = '#ef4444';
-            setTimeout(() => messageInput.parentElement.style.borderColor = '', 2000);
-            return;
-        }
-        if (currentStep < totalSteps) {
-            showStep(currentStep + 1);
-        }
-    };
-
-    // ===== PREVIOUS STEP =====
-    window.prevStep = function() {
-        if (currentStep > 1) {
-            showStep(currentStep - 1);
-        }
-    };
-
-    // ===== TOAST =====
-    function showToast(message, icon = 'fa-check-circle', isError = false) {
-        const toast = document.createElement('div');
-        toast.className = 'toast ' + (isError ? 'error' : 'success');
-        toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
-        toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-            toast.classList.add('hide');
-            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 300);
-        }, 5000);
-    }
-
-    // ===== SEND VIA API =====
-    async function sendToTelegram(message) {
-        try {
-            const response = await fetch('/api/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: message })
-            });
-            const data = await response.json();
-
-            if (data.ok) {
-                showToast('✨ Secret message sent successfully!', 'fa-check-circle');
-                return true;
-            } else {
-                showToast('❌ ' + (data.error || 'Error'), 'fa-exclamation-triangle', true);
-                return false;
-            }
-        } catch (err) {
-            showToast('⚠️ Network error. Please try again.', 'fa-exclamation-triangle', true);
-            return false;
-        }
-    }
-
-    // ===== BUILD MESSAGE =====
-    function buildMessage() {
-        const name = nameInput.value.trim() || 'Anonymous';
-        const age = ageInput.value.trim() || 'Not specified';
-        const city = cityInput.value.trim() || 'Not specified';
-        const message = messageInput.value.trim() || '(No message)';
-
-        return `<b>📩 New Secret Message</b>\n` +
-               `━━━━━━━━━━━━━━━━━━━━\n` +
-               `👤 Name: ${name}\n` +
-               `📅 Age: ${age}\n` +
-               `📍 City: ${city}\n` +
-               `━━━━━━━━━━━━━━━━━━━━\n` +
-               `💬 Message:\n${message}\n` +
-               `━━━━━━━━━━━━━━━━━━━━\n` +
-               `🕐 ${new Date().toLocaleString()}`;
-    }
-
-    // ===== FORM SUBMIT =====
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        if (!messageInput.value.trim()) {
-            showToast('⚠️ Please write a message.', 'fa-exclamation-triangle', true);
-            return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Sending...`;
-
-        const message = buildMessage();
-        const success = await sendToTelegram(message);
-
-        if (success) {
-            nameInput.value = '';
-            ageInput.value = '';
-            cityInput.value = '';
-            messageInput.value = '';
-            showStep(1);
-        }
-
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Send Message`;
-    }
-
-    // ===== ENTER KEY =====
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const activeStep = document.querySelector('.step.active');
-            if (activeStep) {
-                const stepNum = parseInt(activeStep.dataset.step);
-                if (stepNum === 4) {
-                    if (e.target === messageInput) {
-                        e.preventDefault();
-                        form.dispatchEvent(new Event('submit'));
-                    }
-                } else {
-                    if (e.target.tagName === 'INPUT') {
-                        e.preventDefault();
-                        window.nextStep();
-                    }
-                }
-            }
+    // ===== Navigation Highlight =====
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
         }
     });
 
-    // ===== INIT =====
-    showStep(1);
-    form.addEventListener('submit', handleSubmit);
+    // ===== Animated Counter (if any .counter exists) =====
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target')) || 100;
+        let count = 0;
+        const step = Math.ceil(target / 60);
+        const timer = setInterval(() => {
+            count += step;
+            if (count >= target) {
+                count = target;
+                clearInterval(timer);
+            }
+            counter.textContent = count.toLocaleString();
+        }, 30);
+    });
 
-    setTimeout(() => {
-        showToast('🌟 Step 1 of 4 · Enter your name', 'fa-info-circle');
-    }, 600);
+    // ===== Toast Notification System =====
+    window.showToast = function(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 32px;
+            border-radius: 14px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            font-weight: 600;
+            z-index: 9999;
+            border: 1px solid rgba(255,255,255,0.08);
+            max-width: 90%;
+            text-align: center;
+            transition: opacity 0.4s;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        `;
+        if (type === 'success') {
+            toast.style.borderColor = 'rgba(0,255,100,0.3)';
+            toast.style.color = '#7dffb3';
+        } else if (type === 'error') {
+            toast.style.borderColor = 'rgba(255,0,50,0.3)';
+            toast.style.color = '#ff7d8a';
+        }
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 400);
+        }, 2800);
+    };
 
-})();
+    // ===== Secret Message Generator (for message.html) =====
+    const secretForm = document.getElementById('secretForm');
+    if (secretForm) {
+        secretForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('senderName').value.trim() || 'Anonymous';
+            const message = document.getElementById('secretMessage').value.trim();
+            const color = document.getElementById('msgColor').value || '#ffd700';
+
+            if (!message) {
+                window.showToast('Please write a secret message!', 'error');
+                return;
+            }
+
+            const output = document.getElementById('messageOutput');
+            const secretText = document.getElementById('secretText');
+            const senderDisplay = document.getElementById('senderDisplay');
+
+            secretText.textContent = `"${message}"`;
+            secretText.style.color = color;
+            senderDisplay.textContent = `— ${name}`;
+            output.classList.add('show');
+
+            window.showToast('✨ Secret message sent!', 'success');
+        });
+    }
+
+    // ===== City Selector (for city.html) =====
+    const cityMessages = {
+        'newyork': '🗽 The city that never sleeps — keep your dreams awake!',
+        'london': '🎩 Mind the gap between who you are and who you can be.',
+        'tokyo': '🌸 Even the smallest flower blooms in its own time.',
+        'paris': '🥖 Love is the answer — what was the question?',
+        'dubai': '🏙️ Aim for the sky, but build your foundation strong.',
+        'mumbai': '🌊 Life is like the sea — sometimes calm, sometimes waves.',
+        'berlin': '🎨 Be the artist of your own life story.',
+        'sydney': '🏄 Ride the wave of opportunity when it comes.',
+        'default': '🌍 Wherever you are, you are exactly where you need to be.'
+    };
+
+    const cityBtns = document.querySelectorAll('.city-btn');
+    const cityMsgDisplay = document.getElementById('cityMessage');
+
+    if (cityBtns.length && cityMsgDisplay) {
+        cityBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                cityBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const city = this.getAttribute('data-city');
+                const msg = cityMessages[city] || cityMessages['default'];
+                cityMsgDisplay.textContent = msg;
+                cityMsgDisplay.style.opacity = '0';
+                setTimeout(() => {
+                    cityMsgDisplay.style.opacity = '1';
+                }, 50);
+            });
+        });
+    }
+
+    // ===== Age Checker (for age.html) =====
+    const ageForm = document.getElementById('ageForm');
+    if (ageForm) {
+        ageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ageInput = document.getElementById('ageInput');
+            const age = parseInt(ageInput.value);
+
+            if (isNaN(age) || age < 1 || age > 120) {
+                window.showToast('Please enter a valid age (1-120)', 'error');
+                return;
+            }
+
+            const resultDiv = document.getElementById('ageResult');
+            const ageDisplay = document.getElementById('ageDisplay');
+            const ageStatus = document.getElementById('ageStatus');
+
+            ageDisplay.textContent = age;
+
+            if (age >= 18) {
+                ageStatus.textContent = '✅ Access Granted — You are eligible!';
+                ageStatus.className = 'age-status valid';
+                window.showToast('🎉 Access granted!', 'success');
+            } else {
+                const yearsLeft = 18 - age;
+                ageStatus.textContent = `🔒 Access Denied — Come back in ${yearsLeft} year${yearsLeft > 1 ? 's' : ''}!`;
+                ageStatus.className = 'age-status invalid';
+                window.showToast('⛔ Access denied', 'error');
+            }
+
+            resultDiv.style.display = 'block';
+        });
+    }
+
+    // ===== Instagram-like Story (for instagram.html) =====
+    const storyRings = document.querySelectorAll('.story-ring');
+    storyRings.forEach(ring => {
+        ring.addEventListener('click', function() {
+            const msg = this.getAttribute('data-msg') || '🌟 Secret story!';
+            const msgBox = document.getElementById('instaMessage');
+            if (msgBox) {
+                msgBox.textContent = msg;
+                msgBox.style.color = '#ffd700';
+                window.showToast('📸 Story viewed!', 'success');
+            }
+        });
+    });
+
+    // ===== Auto-hide flash messages =====
+    const flashMessages = document.querySelectorAll('.flash-message');
+    flashMessages.forEach(msg => {
+        setTimeout(() => {
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 400);
+        }, 3000);
+    });
+
+    console.log('🌈 Secret Message · Colorful 2026 loaded!');
+});
