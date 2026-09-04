@@ -1,9 +1,18 @@
-# 🌈 Secret Message · Colorful 2026
+# 🤫 Secret Message · Colorful 2026
 
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel)](https://secret-message.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github)](https://github.com/Sofior12/lit)
+A vibrant, colorful web app for sharing anonymous secret messages with a modern UI.
+
+## ✨ Features
+
+- 📨 **Send Secret Messages** — Share anonymous messages with custom colors
+- 📷 **Instagram Style** — Story rings with hidden messages
+- 🌆 **City Selector** — Get inspirational messages from different cities
+- 🎂 **Age Check** — Verify age to access content
+- 📡 **REST API** — Full CRUD API for messages
+- 🌈 **Colorful 2026 Theme** — Gradient backgrounds and animations
 
 ## 🚀 Live Demo
-**Vercel Deployment:** [secret-message.vercel.app](https://secret-message.vercel.app)
 
-## 📁 Repository Structure
+[Deployed on Vercel](https://your-app-url.vercel.app)
+
+## 📁 Project Structure
