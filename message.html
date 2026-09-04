@@ -1,142 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐍 Message · Submit</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Secret Message</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="bg-glow">
-        <div class="orb o1"></div>
-        <div class="orb o2"></div>
-        <div class="orb o3"></div>
-    </div>
-
     <div class="container">
-        <div class="card">
+        <div class="message-container">
+            <h2>📨 Secret Message</h2>
+            <p class="sub">Share anonymously · Colorful 2026</p>
 
-            <div class="header">
-                <div class="logo">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Secret<span>Message</span></span>
+            <form id="secretForm">
+                <div class="form-group">
+                    <label>Your Name (optional)</label>
+                    <input type="text" id="senderName" placeholder="Anonymous" maxlength="30">
                 </div>
-                <div class="step-badge">5 / 5</div>
+
+                <div class="form-group">
+                    <label>🔮 Your Secret Message</label>
+                    <textarea id="secretMessage" placeholder="Write your secret here..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🎨 Message Color</label>
+                    <input type="color" id="msgColor" value="#ffd700">
+                </div>
+
+                <button type="submit" class="btn" style="width:100%;">Send Secret ✨</button>
+            </form>
+
+            <div class="message-output" id="messageOutput">
+                <div class="secret" id="secretText">"Your secret message"</div>
+                <p style="text-align:center;color:#a8a6d6;margin-top:8px;" id="senderDisplay">— Anonymous</p>
             </div>
 
-            <div class="progress">
-                <div class="progress-track">
-                    <div class="progress-fill" style="width:100%"></div>
-                </div>
-                <div class="steps">
-                    <span class="done">Name</span>
-                    <span class="done">Age</span>
-                    <span class="done">City</span>
-                    <span class="done">IG</span>
-                    <span class="active">Message</span>
-                </div>
-            </div>
-
-            <div class="content">
-                <div class="icon"><i class="fas fa-feather-pointed"></i></div>
-                <h1>Your <span>secret</span> message</h1>
-                <p>💌 Say anything · it's safe</p>
-
-                <div class="input-wrap">
-                    <div class="input textarea">
-                        <i class="fas fa-pencil-alt"></i>
-                        <textarea id="messageInput" placeholder="Write your message here..." rows="4"></textarea>
-                    </div>
-                </div>
-
-                <div class="btn-group">
-                    <a href="instagram.html" class="btn secondary"><i class="fas fa-arrow-left"></i> Back</a>
-                    <button class="btn gradient" id="submitBtn" onclick="submitMessage()">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </div>
-            </div>
-
-            <div class="footer">
-                <span><i class="fas fa-shield-alt"></i> 256-bit</span>
-                <span><i class="fas fa-bolt"></i> 0.2ms</span>
-                <span><i class="fas fa-lock"></i> Encrypted</span>
-            </div>
-
+            <a href="index.html" class="back-link">← Back to Home</a>
         </div>
-        <div class="domain">secret-message.vercel.app · 2026</div>
     </div>
-
-    <!-- Toast -->
-    <div id="toast" class="toast"></div>
-
-    <script>
-        async function submitMessage() {
-            const msg = document.getElementById('messageInput').value.trim();
-            if (!msg) {
-                showToast('⚠️ Please write a message', true);
-                return;
-            }
-
-            const name = sessionStorage.getItem('userName') || 'Anonymous';
-            const age = sessionStorage.getItem('userAge') || 'Not specified';
-            const city = sessionStorage.getItem('userCity') || 'Not specified';
-            const instagram = sessionStorage.getItem('userInstagram') || 'Not specified';
-
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sending...';
-
-            const text = `<b>📩 New Secret Message</b>\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `👤 Name: ${name}\n` +
-                `📅 Age: ${age}\n` +
-                `📍 City: ${city}\n` +
-                `📸 Instagram: ${instagram}\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `💬 Message:\n${msg}\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🕐 ${new Date().toLocaleString()}`;
-
-            try {
-                const res = await fetch('/api/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
-                });
-                const data = await res.json();
-
-                if (data.ok) {
-                    showToast('✅ Message sent successfully!');
-                    sessionStorage.clear();
-                    setTimeout(() => window.location.href = 'index.html', 1500);
-                } else {
-                    showToast('❌ Error: ' + (data.error || 'Unknown'), true);
-                }
-            } catch (err) {
-                showToast('⚠️ Network error. Please try again.', true);
-            }
-
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-        }
-
-        function showToast(msg, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.className = 'toast show' + (isError ? ' error' : '');
-            setTimeout(() => { toast.className = 'toast'; }, 4000);
-        }
-
-        document.getElementById('messageInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.shiftKey) {
-                e.preventDefault();
-                submitMessage();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
