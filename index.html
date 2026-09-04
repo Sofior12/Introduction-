@@ -1,91 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐍 Name · Step 1</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Message · Colorful 2026</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="bg-glow">
-        <div class="orb o1"></div>
-        <div class="orb o2"></div>
-        <div class="orb o3"></div>
-    </div>
-
     <div class="container">
-        <div class="card">
+        <header>
+            <h1>🤫 Secret Message</h1>
+            <p class="subtitle">Colorful 2026 Edition</p>
+        </header>
 
-            <!-- Header -->
-            <div class="header">
-                <div class="logo">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Secret<span>Message</span></span>
-                </div>
-                <div class="step-badge">1 / 5</div>
-            </div>
-
-            <!-- Progress -->
-            <div class="progress">
-                <div class="progress-track">
-                    <div class="progress-fill" style="width:20%"></div>
-                </div>
-                <div class="steps">
-                    <span class="active">Name</span>
-                    <span>Age</span>
-                    <span>City</span>
-                    <span>IG</span>
-                    <span>Message</span>
-                </div>
-            </div>
-
-            <!-- Content -->
-            <div class="content">
-                <div class="icon"><i class="fas fa-user-astronaut"></i></div>
-                <h1>What's your <span>name</span>?</h1>
-                <p>✨ Completely anonymous · no one will know</p>
-
-                <div class="input-wrap">
-                    <div class="input">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="nameInput" placeholder="Enter your name..." />
-                    </div>
+        <main>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📨 Send Secret Message</h3>
+                    <p>Share an anonymous secret message with anyone.</p>
+                    <a href="message.html" class="btn">Send Now</a>
                 </div>
 
-                <button class="btn primary" onclick="nextPage()">
-                    Continue <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
+                <div class="card">
+                    <h3>📷 Instagram Style</h3>
+                    <p>Share messages with Instagram-inspired UI.</p>
+                    <a href="instagram.html" class="btn">Open</a>
+                </div>
 
-            <!-- Footer -->
-            <div class="footer">
-                <span><i class="fas fa-shield-alt"></i> 256-bit</span>
-                <span><i class="fas fa-bolt"></i> 0.2ms</span>
-                <span><i class="fas fa-lock"></i> Encrypted</span>
-            </div>
+                <div class="card">
+                    <h3>🌆 City Selector</h3>
+                    <p>Pick a city and get a secret message.</p>
+                    <a href="city.html" class="btn">Explore</a>
+                </div>
 
-        </div>
-        <div class="domain">secret-message.vercel.app · 2026</div>
+                <div class="card">
+                    <h3>🎂 Age Check</h3>
+                    <p>Verify age to access secret content.</p>
+                    <a href="age.html" class="btn">Check</a>
+                </div>
+
+                <div class="card">
+                    <h3>📡 API</h3>
+                    <p>REST API endpoints for messages.</p>
+                    <a href="api" class="btn">View API</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>✨ Secret Message · Colorful 2026 ✨</p>
+        </footer>
     </div>
-
-    <script>
-        function nextPage() {
-            const name = document.getElementById('nameInput').value.trim();
-            if (!name) {
-                alert('Please enter your name');
-                return;
-            }
-            sessionStorage.setItem('userName', name);
-            window.location.href = 'age.html';
-        }
-
-        // Enter key support
-        document.getElementById('nameInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') nextPage();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
